@@ -9,15 +9,15 @@ const path   = require("path");
 
 
 // tasks: can run in parallel or in series, see "user supplied keys" in quench.js
-const defaultTasks = ["js", "css", "svg-sprite"];
+const defaultTasks = ["js"];
 
 
 // default configuration
 // For details, see "user supplied keys" in quench.js
 const defaults = {
-    root: path.resolve(__dirname, "../../web/Website/assets"),
-    dest: path.resolve(__dirname, "../../web/Website/assets/build"),
-    tasks: [defaultTasks, "browser-sync"],
+    root: path.resolve(__dirname, "../app"),
+    dest: path.resolve(__dirname, "../app/build"),
+    tasks: [defaultTasks],
     env: "development", // "development", "production", "local"
     watch: false
 };
