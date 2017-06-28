@@ -10,9 +10,6 @@ class AllDocumentsApp extends Component {
     render = () => {
         return (
             <div className="all-documents-search">
-                <Controls />
-                <Pagination />
-                <Results />
                 <Pagination />
             </div>
         )

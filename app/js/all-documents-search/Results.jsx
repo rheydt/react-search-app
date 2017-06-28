@@ -3,8 +3,10 @@ import React, { Component } from 'react';
 class Results extends Component {
 
     render = () => {
+
         return (
-            <div>Results</div>
+            <div>
+            </div>
         )
     }
 }
