@@ -6,20 +6,21 @@ class FilterOption extends Component {
 
     static propTypes = {
         data: shape({
-            label: string,
-            value: string,
-            hits: number
+            hits: number,
+            text: string
         })
     }
 
     render = () => {
 
-        const { label, value, hits } = this.props;
+        console.log(this.props);
+
+        const { hits, text } = this.props;
 
         return (
             <li>
-                <input type="checkbox" value={value} />
-                <a href="#">{label} ({hits})</a>
+                <input type="checkbox" />
+                <a href="#">{this.props.text} ( {this.props.hits} )</a>
             </li>
         )
     }

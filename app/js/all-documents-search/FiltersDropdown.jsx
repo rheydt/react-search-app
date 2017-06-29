@@ -41,11 +41,13 @@ class FiltersDropdown extends Component {
             <FilterOption key={index} data={item} />
         );
 
+        console.log(colOneItems, colTwoItems);
+
         return (
             <dd>
                 <div className="multiSelect">
-                    {colOneElements}
-                    {colTwoElements}
+                    <ul>{colOneElements}</ul>
+                    <ul>{colTwoElements}</ul>
                 </div>
             </dd>
         )
