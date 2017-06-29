@@ -1,0 +1,12 @@
+.all-documents-search .cnt-fields:first-of-type {
+    float: left;
+    display: inline-block;
+    width: 40%;
+    padding: 0;
+    border: 0;
+    margin: 0;
+}
+
+.all-documents-search .pagination {
+    display: inline;
+}

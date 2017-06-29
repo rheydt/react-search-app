@@ -35,7 +35,7 @@ class Pagination extends Component {
         const { currentPage, totalPages } = this.props;
 
         return (
-            <span><span>Page {currentPage}</span> of {totalPages}</span>
+            <div className="pagination"><span>Page {currentPage}</span> of {totalPages}</div>
         );
     }
 
@@ -59,7 +59,7 @@ class Pagination extends Component {
     render = () => {
         return (
             <div className="pnlResults">
-                <p className="pages">
+                <div className="pages">
 
                     {this.renderPrevButton()}
 
@@ -69,7 +69,7 @@ class Pagination extends Component {
 
                     {this.renderNextButton()}
 
-                </p>
+                </div>
             </div>
         );
     }

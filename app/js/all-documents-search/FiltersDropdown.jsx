@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Select from 'react-select';
 import { array, string } from 'prop-types';
 
 
@@ -10,21 +11,33 @@ class FiltersDropdown extends Component {
         label: string
     }
 
+    renderOption = () => {
+        console.log(this.props.filters);
+
+        return (
+            "test"
+        );
+    }
+
+    logChange = (val) => {
+        console.log("Selected: " + JSON.stringify(val));
+    }
+
     render = () => {
 
         const { filters, selected, label } = this.props;
 
         return (
-            <fieldset className="cnt-fields">
-                <dl className="dropdown">
-                    <dt>
-                        <a name="filters">
-                            <span className="filter-label">{label}</span>
-                            <p className="multiSel"></p>
-                        </a>
-                    </dt>
-                </dl>
-            </fieldset>
+            <Select
+                name="form-field-name"
+                value="one"
+                options={filters}
+                multi={true}
+                placeholder={label}
+                className={"cnt-fields"}
+                optionRenderer={this.renderOption}
+                onChange={this.logChange}
+            />
         )
     }
 }
