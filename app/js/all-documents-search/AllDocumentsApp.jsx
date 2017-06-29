@@ -20,10 +20,22 @@ class AllDocumentsApp extends Component {
         pageRange: 10,
         filters: fakeData.filters,
         selectedFilters: fakeData.selectedFilters,
-        searchTerm: fakeData.searchTerm
+        searchTerm: fakeData.searchTerm,
+        filtersLabel: "Select Filters",
+        searchLabel: "Country Specific Search",
+        searchButtonText : "Search"
     }
 
     render = () => {
+
+        let controlsProps = {
+            filters: this.state.filters,
+            selectedFilters: this.state.selectedFilters,
+            filtersLabel: this.state.filtersLabel,
+            searchLabel: this.state.searchLabel,
+            searchButtonText: this.state.searchButtonText
+        };
+
         let paginationProps = {
             currentPage: this.state.currentPage,
             totalPages: this.state.totalPages,
@@ -33,12 +45,12 @@ class AllDocumentsApp extends Component {
         let resultsProps = {
             results: this.state.results,
             noResultsMessage: this.state.noResultsMessage
-        }
+        };
 
         return (
 
             <div className="all-documents-search">
-                <Controls />
+                <Controls {...controlsProps} />
                 <Pagination {...paginationProps}/>
                 <ResultsSection {...resultsProps}/>
                 <Pagination {...paginationProps}/>

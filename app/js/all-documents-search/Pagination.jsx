@@ -32,8 +32,10 @@ class Pagination extends Component {
     }
 
     renderPageXofY = () => {
+        const { currentPage, totalPages } = this.props;
+
         return (
-            <span><span>Page {this.props.currentPage}</span> of {this.props.totalPages}</span>
+            <span><span>Page {currentPage}</span> of {totalPages}</span>
         );
     }
 
