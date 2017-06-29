@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import { int } from 'prop-types';
+import { number } from 'prop-types';
 
 
 class Pagination extends Component {
 
     static propTypes = {
-        currentPage: int,
-        totalPages: int,
-        pageRange: int
+        currentPage: number,
+        totalPages: number,
+        pageRange: number
     }
 
     state =  {
@@ -17,7 +17,7 @@ class Pagination extends Component {
 
     renderPrevButton = () => {
         if (this.state.showPrev) {
-            return (<a href="#" className="prev"></a>);
+            return (<a href="#" className="previous"></a>);
         } else {
             return;
         }
@@ -33,7 +33,7 @@ class Pagination extends Component {
 
     renderPageXofY = () => {
         return (
-            <span>Page {this.props.currentPage} of {this.props.totalPages}</span>
+            <span><span>Page {this.props.currentPage}</span> of {this.props.totalPages}</span>
         );
     }
 
@@ -69,7 +69,7 @@ class Pagination extends Component {
 
                 </p>
             </div>
-        )
+        );
     }
 }
 
