@@ -19,6 +19,12 @@ class FiltersDropdown extends Component {
         );
     }
 
+    renderArrow = () => {
+        return (
+            <span className="cnt-fields__dropdown-arrow"></span>
+        );
+    }
+
     logChange = (val) => {
         console.log("Selected: " + JSON.stringify(val));
     }
@@ -34,8 +40,7 @@ class FiltersDropdown extends Component {
                 options={filters}
                 multi={true}
                 placeholder={label}
-                className={"cnt-fields"}
-                optionRenderer={this.renderOption}
+                className={"cnt-fields cnt-fields--filters"}
                 onChange={this.logChange}
             />
         )
