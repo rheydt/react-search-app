@@ -1,24 +1,25 @@
 import React, { Component } from 'react';
-import { array } from 'prop-types';
+import { array, string } from 'prop-types';
 
 
 class FiltersDropdown extends Component {
 
     static propTypes = {
         filters: array,
-        selected: array
+        selected: array,
+        label: string
     }
 
     render = () => {
 
-        const { filters, selected } = this.props;
+        const { filters, selected, label } = this.props;
 
         return (
             <fieldset className="cnt-fields">
                 <dl className="dropdown">
                     <dt>
                         <a name="filters">
-                            <span className="filter-label">Select Filters</span>
+                            <span className="filter-label">{label}</span>
                             <p className="multiSel"></p>
                         </a>
                     </dt>
