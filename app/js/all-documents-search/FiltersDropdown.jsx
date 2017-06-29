@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import Select from 'react-select';
 import { array, string } from 'prop-types';
+
+import FilterOption from './FilterOption.jsx';
 
 
 class FiltersDropdown extends Component {
@@ -11,38 +12,54 @@ class FiltersDropdown extends Component {
         label: string
     }
 
-    renderOption = () => {
-        console.log(this.props.filters);
+    renderField = () => {
+        const { selected, label } = this.props;
 
         return (
-            "test"
-        );
+            <dt>
+                <a name="filters">
+                    <span className="filter-label">{label}</span>
+                    <p className="multiSel"></p>
+                </a>
+            </dt>
+        )
     }
 
-    renderArrow = () => {
+
+    renderDropdownMenu = () => {
+        const { filters } = this.props;
+
+        const colLength = Math.floor(filters.length / 2);
+
+        const colOneItems = filters.slice(0, colLength);
+        const colOneElements = colOneItems.map((item, index) =>
+            <FilterOption key={index} data={item} />
+        );
+
+        const colTwoItems = filters.slice(colLength, filters.length);
+        const colTwoElements = colTwoItems.map((item, index) =>
+            <FilterOption key={index} data={item} />
+        );
+
         return (
-            <span className="cnt-fields__dropdown-arrow"></span>
-        );
-    }
-
-    logChange = (val) => {
-        console.log("Selected: " + JSON.stringify(val));
+            <dd>
+                <div className="multiSelect">
+                    {colOneElements}
+                    {colTwoElements}
+                </div>
+            </dd>
+        )
     }
 
     render = () => {
 
-        const { filters, selected, label } = this.props;
-
         return (
-            <Select
-                name="form-field-name"
-                value="one"
-                options={filters}
-                multi={true}
-                placeholder={label}
-                className={"cnt-fields cnt-fields--filters"}
-                onChange={this.logChange}
-            />
+            <fieldset className="cnt-fields cnt-fields--filters">
+                <dl className="dropdown">
+                    {this.renderField()}
+                    {this.renderDropdownMenu()}
+                </dl>
+            </fieldset>
         )
     }
 }

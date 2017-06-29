@@ -29,8 +29,8 @@ class Controls extends Component {
 
                 <FiltersDropdown {...filtersProps}/>
 
-                <fieldset className="cnt-fields">
-                    <input type="text" className="cnt-search cnt-search--search-input" placeholder={searchLabel}></input>
+                <fieldset className="cnt-fields cnt-fields--search-input">
+                    <input type="text" className="cnt-search" placeholder={searchLabel}></input>
                     <button type="submit" className="text">{searchButtonText}</button>
                 </fieldset>
 
