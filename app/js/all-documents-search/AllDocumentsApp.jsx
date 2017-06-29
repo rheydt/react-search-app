@@ -6,13 +6,21 @@ import Controls from './Controls.jsx';
 import Pagination from './Pagination.jsx';
 import ResultsSection from './ResultsSection.jsx';
 
+const fakeData = require('./fakeDataDefault.json');
+
+
 class AllDocumentsApp extends Component {
+
     state = {
-        results: [{}, {}],
-        currentPage: 1,
-        totalPages: 1000,
+        results: fakeData.results,
+        totalHits: fakeData.totalHits,
+        noResultsMessage: "No results found.",
+        currentPage: fakeData.currentPage,
+        totalPages: fakeData.totalPages,
         pageRange: 10,
-        noResultsMessage: "No results found."
+        filters: fakeData.filters,
+        selectedFilters: fakeData.selectedFilters,
+        searchTerm: fakeData.searchTerm
     }
 
     render = () => {
@@ -28,9 +36,12 @@ class AllDocumentsApp extends Component {
         }
 
         return (
+
             <div className="all-documents-search">
+                <Controls />
                 <Pagination {...paginationProps}/>
                 <ResultsSection {...resultsProps}/>
+                <Pagination {...paginationProps}/>
             </div>
         )
     }
