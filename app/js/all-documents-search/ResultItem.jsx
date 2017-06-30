@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { shape, string, array } from 'prop-types';
 
+import ResultTag from './ResultTag.jsx';
+
 
 class ResultsItem extends Component {
 
@@ -18,7 +20,8 @@ class ResultsItem extends Component {
         const { tags } = this.props.data;
 
         const tagsList = tags.map((tag, index) =>
-            <a key={index} href="#" className="btn classify">{tag}</a>
+            <ResultTag key={index} tag={tag}/>
+            // <a key={index} href="#" className="btn classify">{tag}</a>
         );
 
         return (

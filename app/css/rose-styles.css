@@ -53,6 +53,11 @@
         z-index: 9;
     }
 
+    /* adding some pointers to clickable elements */
+    .all-documents-search .filter-field {
+        cursor:  pointer;
+    }
+
 
 /*** PAGINATION STYLES ***/
 
