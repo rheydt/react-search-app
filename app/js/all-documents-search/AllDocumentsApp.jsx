@@ -18,7 +18,7 @@ class AllDocumentsApp extends Component {
         totalPages: fakeData.totalPages,
         pageRange: 10,
         filters: fakeData.filters,
-        selectedFilters: fakeData.selectedFilters,
+        selected: fakeData.selectedFilters,
         searchTerm: fakeData.searchTerm,
         filtersLabel: "Select Filters",
         searchLabel: "Country Specific Search",
@@ -29,7 +29,7 @@ class AllDocumentsApp extends Component {
 
         let controlsProps = {
             filters: this.state.filters,
-            selectedFilters: this.state.selectedFilters,
+            selected: this.state.selected,
             filtersLabel: this.state.filtersLabel,
             searchLabel: this.state.searchLabel,
             searchButtonText: this.state.searchButtonText

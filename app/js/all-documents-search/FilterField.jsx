@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { array, string, func, bool} from 'prop-types';
+import classNames from 'classnames';
 
 
 class FilterField extends Component {
@@ -8,6 +9,10 @@ class FilterField extends Component {
         selected: array,
         label: string,
         toggleDropdown: func
+    }
+
+    state = {
+        isEmpty : (!this.props.selected || this.props.selected.length <= 0)
     }
 
     handleClick = (e) => {
@@ -21,10 +26,16 @@ class FilterField extends Component {
 
         const { selected, label } = this.props;
 
+        // conditionally add is-showing class for placeholder styling purposes
+        const visibleLabelClass = classNames("filter-label", {
+            "is-visible": this.state.isEmpty
+        });
+
+
         return (
             <dt>
                 <a name="filters" onClick={this.handleClick}>
-                    <span className="filter-label">{label}</span>
+                    <span className={visibleLabelClass}>{label}</span>
                     <p className="multiSel"></p>
                 </a>
             </dt>

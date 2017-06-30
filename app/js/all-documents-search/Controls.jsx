@@ -8,7 +8,7 @@ class Controls extends Component {
 
     static propTypes = {
         filters: array,
-        selectedFilters: array,
+        selected: array,
         filtersLabel: string,
         searchLabel: string,
         searchButtonText: string
@@ -16,11 +16,11 @@ class Controls extends Component {
 
     render = () => {
 
-        const { filters, selectedFilters, filtersLabel, searchLabel, searchButtonText } = this.props;
+        const { filters, selected, filtersLabel, searchLabel, searchButtonText } = this.props;
 
         let filtersProps = {
             filters: filters,
-            selected: selectedFilters,
+            selected: selected,
             label: filtersLabel
         }
 

@@ -23,7 +23,6 @@ class Filters extends Component {
         if (this.state.isOpen) {
             document.addEventListener("click", this.handleClickAway, true);
         } else {
-            // cleanup event listener
             document.removeEventListener("click", this.handleClickAway, true);
         }
     }

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { array, string, bool } from 'prop-types';
 import classNames from 'classnames';
 
-
 import FilterOption from './FilterOption.jsx';
 
 
