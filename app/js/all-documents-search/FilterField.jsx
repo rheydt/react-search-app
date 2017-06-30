@@ -23,7 +23,7 @@ class FilterField extends Component {
 
         return (
             <dt>
-                <a name="filters">
+                <a name="filters" onClick={this.handleClick}>
                     <span className="filter-label">{label}</span>
                     <p className="multiSel"></p>
                 </a>
