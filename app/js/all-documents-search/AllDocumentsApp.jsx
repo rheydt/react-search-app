@@ -5,7 +5,7 @@ import Controls from './Controls.jsx';
 import Pagination from './Pagination.jsx';
 import ResultsSection from './ResultsSection.jsx';
 
-const fakeData = require('./fakeDataDefault.json');
+const fakeData = require('./json/fakeDataDefault.json');
 
 
 class AllDocumentsApp extends Component {
