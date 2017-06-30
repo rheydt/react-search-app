@@ -7,6 +7,7 @@ const debug       = require("gulp-debug");
 const notify      = require("gulp-notify");
 const sourcemaps  = require("gulp-sourcemaps");
 const browserify  = require("browserify");
+const browserifyShim  = require("browserify-shim");
 const babelify    = require("babelify");
 const through2    = require("through2");
 const vinylSource = require("vinyl-source-stream");
@@ -199,7 +200,7 @@ function createNpmPackagesGetter(files){
             lastCommonPackages = npmPackages;
         }
 
-        return npmPackages;
+        return npmPackages.concat(["jquery"]);
     };
 }
 
@@ -221,6 +222,9 @@ function bundleJs(browserifyOptions, npmPackages){
             .transform(babelify, { // run it through babel, for es6 transpiling
                 presets: [ "es2015", "react" ],
                 plugins: [ "transform-object-rest-spread", "transform-class-properties" ]
+            })
+            .transform(browserifyShim, {
+                "jquery": "global:$"
             });
 
         // externalize common packages
