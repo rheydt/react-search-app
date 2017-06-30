@@ -17,27 +17,30 @@ class Filters extends Component {
         isOpen: false
     }
 
-    // componentDidUpdate = (prevProps, prevState) => {
-    //     // when the menu is open, add an event listener
-    //     // to watch for clicks outside the dropdown or field
-    //     if (this.state.isOpen) {
-    //         document.addEventListener("click", this.handleClickAway, true);
-    //     } else {
-    //         // cleanup
-    //         document.removeEventListener("click", this.handleClickAway, true);
-    //     }
-    // }
-
-    // handleClickAway(e) {
-    //     // if the user clicked outside of the dropdown, close it
-    //     const inDropdown = $(e.target).closest(".dropdown").length;
-    //     if (!inDropdown){ this.toggleDropdown(); }
-    // }
+    componentDidUpdate = (prevProps, prevState) => {
+        // when the menu is open, add an event listener
+        // to watch for clicks outside the dropdown or field
+        if (this.state.isOpen) {
+            document.addEventListener("click", this.handleClickAway, true);
+        } else {
+            // cleanup event listener
+            document.removeEventListener("click", this.handleClickAway, true);
+        }
+    }
 
     toggleDropdown = () => {
         this.setState({
             isOpen: !this.state.isOpen
         });
+    }
+
+    handleClickAway = (e) => {
+        // if the user clicked outside of the dropdown, close it
+        const inDropdown = $(e.target).closest(".dropdown").length;
+
+        if (!inDropdown){
+            this.toggleDropdown();
+        }
     }
 
     render = () => {
