@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { array, string } from 'prop-types';
+import { array, string, func } from 'prop-types';
 
 import FilterField from './FilterField.jsx';
 import FiltersDropdown from './FiltersDropdown.jsx';
@@ -10,7 +10,8 @@ class Filters extends Component {
     static propTypes = {
         filters: array,
         selected: array,
-        label: string
+        label: string,
+        addOrRemoveFilter: func
     }
 
     state = {
@@ -44,7 +45,7 @@ class Filters extends Component {
 
     render = () => {
 
-        const { filters, selected, label } = this.props;
+        const { filters, selected, label, addOrRemoveFilter } = this.props;
 
         const fieldProps = {
             selected: selected,
@@ -56,7 +57,8 @@ class Filters extends Component {
         const dropdownProps = {
             selected: selected,
             filters: filters,
-            isOpen: this.state.isOpen
+            isOpen: this.state.isOpen,
+            addOrRemoveFilter: addOrRemoveFilter
         }
 
         return (

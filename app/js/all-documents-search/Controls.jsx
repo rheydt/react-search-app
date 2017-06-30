@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { array, string } from 'prop-types';
+import { array, string, func } from 'prop-types';
 
 import Filters from './Filters.jsx';
 
@@ -11,17 +11,19 @@ class Controls extends Component {
         selected: array,
         filtersLabel: string,
         searchLabel: string,
-        searchButtonText: string
+        searchButtonText: string,
+        addOrRemoveFilter: func
     }
 
     render = () => {
 
-        const { filters, selected, filtersLabel, searchLabel, searchButtonText } = this.props;
+        const { filters, selected, filtersLabel, searchLabel, searchButtonText, addOrRemoveFilter } = this.props;
 
         let filtersProps = {
             filters: filters,
             selected: selected,
-            label: filtersLabel
+            label: filtersLabel,
+            addOrRemoveFilter: addOrRemoveFilter
         }
 
         return (

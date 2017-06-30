@@ -18,11 +18,24 @@ class AllDocumentsApp extends Component {
         totalPages: fakeData.totalPages,
         pageRange: 10,
         filters: fakeData.filters,
-        selected: fakeData.selectedFilters,
+        selected: fakeData.selectedFilters || [],
         searchTerm: fakeData.searchTerm,
         filtersLabel: "Select Filters",
         searchLabel: "Country Specific Search",
         searchButtonText : "Search"
+    }
+
+    addOrRemoveFilter = (changedFilter) => {
+
+        const prevSelected = this.state.selected;
+
+        const newSelected = prevSelected.includes(changedFilter)
+            ?   prevSelected.filter(function(el) { return el !== changedFilter; })
+            :   prevSelected.concat([changedFilter]);
+
+        this.setState({
+            selected: newSelected
+        });
     }
 
     render = () => {
@@ -32,7 +45,8 @@ class AllDocumentsApp extends Component {
             selected: this.state.selected,
             filtersLabel: this.state.filtersLabel,
             searchLabel: this.state.searchLabel,
-            searchButtonText: this.state.searchButtonText
+            searchButtonText: this.state.searchButtonText,
+            addOrRemoveFilter: this.addOrRemoveFilter
         };
 
         let paginationProps = {

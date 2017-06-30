@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { array, string, bool } from 'prop-types';
+import { array, string, bool, func } from 'prop-types';
 import classNames from 'classnames';
 
 import FilterOption from './FilterOption.jsx';
@@ -10,14 +10,15 @@ class FiltersDropdown extends Component {
     static propTypes = {
         filters: array,
         selected: array,
-        isOpen: bool
+        isOpen: bool,
+        addOrRemoveFilter: func
     }
 
     renderPartialFiltersList = (array, sliceFrom, sliceTo) => {
         const listItems = array.slice(sliceFrom, sliceTo);
 
         const listElements = listItems.map((item, index) =>
-            <FilterOption key={index} data={item} />
+            <FilterOption key={index} data={item} addOrRemoveFilter={this.props.addOrRemoveFilter}/>
         );
 
         return listElements;

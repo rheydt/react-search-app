@@ -12,7 +12,7 @@ class FilterField extends Component {
     }
 
     state = {
-        isEmpty : (!this.props.selected || this.props.selected.length <= 0)
+        isEmpty : this.props.selected.length <= 0
     }
 
     handleClick = (e) => {
@@ -30,7 +30,6 @@ class FilterField extends Component {
         const visibleLabelClass = classNames("filter-label", {
             "is-visible": this.state.isEmpty
         });
-
 
         return (
             <dt>
