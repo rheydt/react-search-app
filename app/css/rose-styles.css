@@ -1,80 +1,61 @@
-// .all-documents-search .cnt-fields--filters {
-//     // copied from .whatsnew .cnt-fields:first-of-type in styles.css
-//     float: left;
-//     display: inline-block;
-//     width: 40%;
-//     padding: 0;
-//     border: 0;
-//     margin: 0;
-// }
-
-// .all-documents-search .cnt-fields--filters .Select-control {
-//     height: 15px;
-//     border: 1px solid #000;
-//     border-radius: 0;
-// }
-
-// .all-documents-search .cnt-fields--search-input {
-//     // copied from .whatsnew .cnt-fields:last-of-type in styles.css
-//     width: 58%;
-//     margin-left: 2%;
-// }
-
-// .all-documents-search .cnt-fields__dropdown-arrow {
-//     // copied from react-select's "Select-arrow-zone" class
-//     cursor: pointer;
-//     display: table-cell;
-//     position: relative;
-//     text-align: center;
-//     vertical-align: middle;
-//     width: 25px;
-//     padding-right: 5px;
-// }
-
-// .all-documents-search .cnt-fields__dropdown-arrow::after {
-//     // copied from .dropdown dt a:after in styles.css
-//     font-family: 'icomoon';
-//     content: "\ea1c";
-//     font-size: 12px;
-//     padding-left: 5px;
-//     float: right;
-//     margin-top: -1.7em;
-// }
-
-#js-all-documents-search {
+.all-documents-search {
     background-color: pink;
 }
 
+/*** FILTERS STYLES ***/
 
-.all-documents-search .pagination {
-    display: inline;
-}
+    /* hide/show expanded filters dropdown */
+    .all-documents-search .filters-dropdown-wrapper {
+        display: none;
+    }
+    .all-documents-search .filters-dropdown-wrapper.is-open {
+        display: block;
+    }
 
-.all-documents-search .dropdown li {
-    display: block;
-    color: #2c2825;
-    outline: none;
-}
+    /* if there are no selected filters, show placeholder and hide selections area */
+    .all-documents-search .filter-field.is-empty .filter-label {
+        display: inline-block;
+    }
+    .all-documents-search .filter-field.is-empty .multiSel {
+        display: none;
+    }
 
-.all-documents-search .dropdown li:hover {
-    background-color: #2c2825;
-    color: #fff;
-}
+    /* if there are selected filters, hide placeholder and show selections */
+    .all-documents-search .filter-field .filter-label {
+        display: none;
+    }
+    .all-documents-search .filter-field .multiSel {
+        display: inline-block;
+    }
 
-.all-documents-search .dropdown dd .multiSelect {
-    display: none;
-    position: absolute;
-    top: 2px;
-    left: 0px;
-    background: white;
-    border: 1px solid #000;
-    width: 600px;
-    height: auto;
-    padding: 5px;
-    overflow: visible;
-    z-index: 9;
-}
+    /* reapplying existing style to new elements */
+    .all-documents-search .dropdown li {
+        display: block;
+        color: #2c2825;
+        outline: none;
+    }
+    .all-documents-search .dropdown li:hover {
+        background-color: #2c2825;
+        color: #fff;
+    }
+    .all-documents-search .dropdown dd .multiSelect {
+        display: none;
+        position: absolute;
+        top: 2px;
+        left: 0px;
+        background: white;
+        border: 1px solid #000;
+        width: 600px;
+        height: auto;
+        padding: 5px;
+        overflow: visible;
+        z-index: 9;
+    }
 
-.all-documents-search .dropdown dd .multiSelect.is-open {
-    display: block;
-}
+
+/*** PAGINATION STYLES ***/
+
+    /* make div inline (previously didn't have a div wrapper) */
+    .all-documents-search .pagination {
+        display: inline;
+    }
