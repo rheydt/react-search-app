@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { array, string } from 'prop-types';
 
-
 import FilterField from './FilterField.jsx';
 import FiltersDropdown from './FiltersDropdown.jsx';
 
@@ -55,7 +54,6 @@ class Filters extends Component {
         const dropdownProps = {
             selected: selected,
             filters: filters,
-            toggleDropdown: this.toggleDropdown,
             isOpen: this.state.isOpen
         }
 
@@ -69,6 +67,5 @@ class Filters extends Component {
         )
     }
 }
-
 
 export default Filters;
