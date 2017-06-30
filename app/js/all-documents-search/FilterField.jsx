@@ -14,7 +14,7 @@ class FilterField extends Component {
         const { toggleDropdown } = this.props;
 
         e.preventDefault();
-        // toggleDropdown();
+        toggleDropdown();
     }
 
     render = () => {
