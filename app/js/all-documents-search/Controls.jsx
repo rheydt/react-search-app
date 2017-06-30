@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { array, string } from 'prop-types';
 
-import FiltersDropdown from './FiltersDropdown.jsx';
+import Filters from './Filters.jsx';
 
 
 class Controls extends Component {
@@ -27,7 +27,7 @@ class Controls extends Component {
         return (
             <form className="form-archive">
 
-                <FiltersDropdown {...filtersProps}/>
+                <Filters {...filtersProps}/>
 
                 <fieldset className="cnt-fields cnt-fields--search-input">
                     <input type="text" className="cnt-search" placeholder={searchLabel}></input>

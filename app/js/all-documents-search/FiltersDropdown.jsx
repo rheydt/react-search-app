@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { array, string } from 'prop-types';
+import { array, string, bool, func } from 'prop-types';
+import classNames from 'classnames';
+
 
 import FilterOption from './FilterOption.jsx';
 
@@ -9,26 +11,15 @@ class FiltersDropdown extends Component {
     static propTypes = {
         filters: array,
         selected: array,
-        label: string
+        isOpen: bool,
+        toggleDropdown: func
     }
 
-    renderField = () => {
-        const { selected, label } = this.props;
+    render = () => {
 
-        return (
-            <dt>
-                <a name="filters">
-                    <span className="filter-label">{label}</span>
-                    <p className="multiSel"></p>
-                </a>
-            </dt>
-        )
-    }
+        const { filters, isOpen, toggleDropdown } = this.props;
 
-
-    renderDropdownMenu = () => {
-        const { filters } = this.props;
-
+        // split the list of options into 2 even (or almost even) groups
         const colLength = Math.ceil(filters.length / 2);
 
         const colOneItems = filters.slice(0, colLength);
@@ -41,25 +32,18 @@ class FiltersDropdown extends Component {
             <FilterOption key={index} data={item} />
         );
 
+        // conditionally add is-open class for styling purposes
+        const openClass = classNames("multiSelect", {
+            "is-open": isOpen
+        });
+
         return (
-            <dd>
-                <div className="multiSelect is-open">
+            <dd className={openClass}>
+                <div className={openClass}>
                     <ul>{colOneElements}</ul>
                     <ul>{colTwoElements}</ul>
                 </div>
             </dd>
-        )
-    }
-
-    render = () => {
-
-        return (
-            <fieldset className="cnt-fields cnt-fields--filters">
-                <dl className="dropdown">
-                    {this.renderField()}
-                    {this.renderDropdownMenu()}
-                </dl>
-            </fieldset>
         )
     }
 }
