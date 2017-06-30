@@ -27,15 +27,15 @@ class FilterField extends Component {
         const { selected, label } = this.props;
 
         // conditionally add is-showing class for placeholder styling purposes
-        const visibleLabelClass = classNames("filter-label", {
-            "is-visible": this.state.isEmpty
+        const isEmptyClass = classNames("filter-field", {
+            "is-empty": this.state.isEmpty
         });
 
         return (
             <dt>
-                <a name="filters" onClick={this.handleClick}>
-                    <span className={visibleLabelClass}>{label}</span>
-                    <p className="multiSel"></p>
+                <a name="filters" className={isEmptyClass} onClick={this.handleClick}>
+                    <span className="filter-label">{label}</span>
+                    <p className="multiSel">SELECTIONS</p>
                 </a>
             </dt>
         )
