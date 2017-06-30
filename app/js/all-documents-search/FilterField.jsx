@@ -11,11 +11,8 @@ class FilterField extends Component {
         toggleDropdown: func
     }
 
-    state = {
-        isEmpty : this.props.selected.length <= 0
-    }
-
     handleClick = (e) => {
+
         const { toggleDropdown } = this.props;
 
         e.preventDefault();
@@ -26,16 +23,21 @@ class FilterField extends Component {
 
         const { selected, label } = this.props;
 
-        // conditionally add is-showing class for placeholder styling purposes
+        const isEmpty = this.props.selected.length === 0;
+
+        // conditionally add is-empty class for placeholder styling purposes
         const isEmptyClass = classNames("filter-field", {
-            "is-empty": this.state.isEmpty
+            "is-empty": isEmpty
         });
+
+        const fieldText = isEmpty
+            ? label
+            : selected.join(", ");
 
         return (
             <dt>
-                <a name="filters" className={isEmptyClass} onClick={this.handleClick}>
-                    <span className="filter-label">{label}</span>
-                    <p className="multiSel">SELECTIONS</p>
+                <a className={isEmptyClass} onClick={this.handleClick}>
+                    <span>{fieldText}</span>
                 </a>
             </dt>
         )

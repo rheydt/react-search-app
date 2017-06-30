@@ -4,28 +4,18 @@
 
 /*** FILTERS STYLES ***/
 
+    /* allowing filter field to grow if selections are long */
+    .all-documents-search .filter-field {
+        height: auto;
+        padding:  5px;
+    }
+
     /* hide/show expanded filters dropdown */
     .all-documents-search .filters-dropdown-wrapper {
         display: none;
     }
     .all-documents-search .filters-dropdown-wrapper.is-open {
         display: block;
-    }
-
-    /* if there are no selected filters, show placeholder and hide selections area */
-    .all-documents-search .filter-field.is-empty .filter-label {
-        display: inline-block;
-    }
-    .all-documents-search .filter-field.is-empty .multiSel {
-        display: none;
-    }
-
-    /* if there are selected filters, hide placeholder and show selections */
-    .all-documents-search .filter-field .filter-label {
-        display: none;
-    }
-    .all-documents-search .filter-field .multiSel {
-        display: inline-block;
     }
 
     /* reapplying existing style to new elements */
@@ -39,7 +29,6 @@
         color: #fff;
     }
     .all-documents-search .dropdown dd .multiSelect {
-        display: none;
         position: absolute;
         top: 2px;
         left: 0px;

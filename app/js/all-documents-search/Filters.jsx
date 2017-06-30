@@ -50,8 +50,7 @@ class Filters extends Component {
         const fieldProps = {
             selected: selected,
             label: label,
-            toggleDropdown: this.toggleDropdown,
-            isOpen: this.state.isOpen
+            toggleDropdown: this.toggleDropdown
         }
 
         const dropdownProps = {
