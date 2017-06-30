@@ -13,14 +13,12 @@ class FilterOption extends Component {
 
     render = () => {
 
-        console.log(this.props);
-
-        const { hits, text } = this.props;
+        const { hits, text } = this.props.data;
 
         return (
             <li>
-                <input type="checkbox" />
-                <a href="#">{this.props.text} ( {this.props.hits} )</a>
+                <input type="checkbox" name={text} value={text} />
+                <label htmlFor={text}>{text} ( {hits} )</label>
             </li>
         )
     }
