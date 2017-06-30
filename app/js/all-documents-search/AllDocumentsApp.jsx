@@ -62,7 +62,7 @@ class AllDocumentsApp extends Component {
 
         return (
 
-            <div className="all-documents-search">
+            <div>
                 <Controls {...controlsProps} />
                 <Pagination {...paginationProps}/>
                 <ResultsSection {...resultsProps}/>
