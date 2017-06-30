@@ -41,8 +41,40 @@
 //     margin-top: -1.7em;
 // }
 
+#js-all-documents-search {
+    background-color: pink;
+}
 
 
 .all-documents-search .pagination {
     display: inline;
+}
+
+.all-documents-search .dropdown li {
+    display: block;
+    color: #2c2825;
+    outline: none;
+}
+
+.all-documents-search .dropdown li:hover {
+    background-color: #2c2825;
+    color: #fff;
+}
+
+.all-documents-search .dropdown dd .multiSelect {
+    display: none;
+    position: absolute;
+    top: 2px;
+    left: 0px;
+    background: white;
+    border: 1px solid #000;
+    width: 600px;
+    height: auto;
+    padding: 5px;
+    overflow: visible;
+    z-index: 9;
+}
+
+.all-documents-search .dropdown dd .multiSelect.is-open {
+    display: block;
 }

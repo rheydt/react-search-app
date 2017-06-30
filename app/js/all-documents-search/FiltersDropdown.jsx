@@ -29,7 +29,7 @@ class FiltersDropdown extends Component {
     renderDropdownMenu = () => {
         const { filters } = this.props;
 
-        const colLength = Math.floor(filters.length / 2);
+        const colLength = Math.ceil(filters.length / 2);
 
         const colOneItems = filters.slice(0, colLength);
         const colOneElements = colOneItems.map((item, index) =>
@@ -41,11 +41,9 @@ class FiltersDropdown extends Component {
             <FilterOption key={index} data={item} />
         );
 
-        console.log(colOneItems, colTwoItems);
-
         return (
             <dd>
-                <div className="multiSelect">
+                <div className="multiSelect is-open">
                     <ul>{colOneElements}</ul>
                     <ul>{colTwoElements}</ul>
                 </div>

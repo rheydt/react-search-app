@@ -18,7 +18,7 @@ class FilterOption extends Component {
         return (
             <li>
                 <input type="checkbox" name={text} value={text} />
-                <label htmlFor={text}>{text} ( {hits} )</label>
+                <label htmlFor={text}>{text} ({hits})</label>
             </li>
         )
     }
