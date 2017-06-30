@@ -27,6 +27,8 @@ class AllDocumentsApp extends Component {
 
     addOrRemoveFilter = (changedFilter) => {
 
+        console.log("adding or removing filter");
+
         const prevSelected = this.state.selected;
 
         const newSelected = prevSelected.includes(changedFilter)
@@ -57,7 +59,8 @@ class AllDocumentsApp extends Component {
 
         let resultsProps = {
             results: this.state.results,
-            noResultsMessage: this.state.noResultsMessage
+            noResultsMessage: this.state.noResultsMessage,
+            addOrRemoveFilter: this.addOrRemoveFilter
         };
 
         return (

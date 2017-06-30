@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { shape, string, array } from 'prop-types';
+import { shape, string, array, func } from 'prop-types';
 
-import ResultTag from './ResultTag.jsx';
+import ResultsTag from './ResultsTag.jsx';
 
 
 class ResultsItem extends Component {
@@ -12,16 +12,17 @@ class ResultsItem extends Component {
             href: string,
             date: string,
             tags: array
-        })
+        }),
+        addOrRemoveFilter: func
     }
 
     renderTags = () => {
 
         const { tags } = this.props.data;
+        const { addOrRemoveFilter } = this.props;
 
         const tagsList = tags.map((tag, index) =>
-            <ResultTag key={index} tag={tag}/>
-            // <a key={index} href="#" className="btn classify">{tag}</a>
+            <ResultsTag key={index} tag={tag} addOrRemoveFilter={addOrRemoveFilter}/>
         );
 
         return (

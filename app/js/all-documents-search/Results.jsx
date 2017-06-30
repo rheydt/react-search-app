@@ -1,19 +1,22 @@
 import React, { Component } from 'react';
-import { array } from 'prop-types';
+import { array, func } from 'prop-types';
 
-import ResultItem from './ResultItem.jsx';
+import ResultsItem from './ResultsItem.jsx';
 
 
 class Results extends Component {
 
     static propTypes = {
-        items: array
+        items: array,
+        addOrRemoveFilter: func
     }
 
     render = () => {
 
-        const listItems = this.props.items.map((item, index) =>
-            <ResultItem key={index} data={item} />
+        const {items, addOrRemoveFilter} = this.props;
+
+        const listItems = items.map((item, index) =>
+            <ResultsItem key={index} data={item} addOrRemoveFilter={addOrRemoveFilter}/>
         );
 
         return (
