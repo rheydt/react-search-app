@@ -34,13 +34,13 @@ class FiltersDropdown extends Component {
         const colTwoElements = this.renderPartialFiltersList(filters, colLength, filters.length);
 
         // conditionally add is-open class for styling purposes
-        const openClass = classNames("multiSelect", {
+        const openClass = classNames("filters-dropdown-wrapper", {
             "is-open": isOpen
         });
 
         return (
             <dd className={openClass}>
-                <div className={openClass}>
+                <div className="multiSelect">
                     <ul>{colOneElements}</ul>
                     <ul>{colTwoElements}</ul>
                 </div>
