@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { number, func } from 'prop-types';
 
+import PaginationArrow from './PaginationArrow.jsx';
+
 
 class Pagination extends Component {
 
@@ -11,52 +13,22 @@ class Pagination extends Component {
         goToPage: func
     }
 
-    state =  {
-        showPrev: true,
-        showNext: true
-    }
+    renderArrow = (direction) => {
+        const { currentPage, totalPages, goToPage } = this.props;
 
-    handleNextOrPrevClick = (e) => {
-        const { currentPage, goToPage } = this.props;
+        /* direction = -1 for previous button
+        ** direction = 1 for next button
+        */
 
-        e.preventDefault();
-        console.log(e.target);
-    }
-
-
-    handlePrevClick = (e) => {
-        const { currentPage, goToPage } = this.props;
-
-        e.preventDefault();
-        goToPage(currentPage - 1);
-    }
-
-    handleNextClick = (e) => {
-        const { currentPage, goToPage } = this.props;
-
-        e.preventDefault();
-        goToPage(currentPage + 1);
-    }
-
-    renderPrevButton = () => {
-        const { currentPage, goToPage } = this.props;
-
-        const prevPage = currentPage - 1;
-
-        if (currentPage > 1) {
-            return (<a href="#" className="previous" data-direction="next" onClick={this.handlePrevClick}></a>);
-        } else {
-            return;
+        const arrowProps = {
+            direction: direction,
+            goToPage: goToPage,
+            destinationPage: currentPage + (direction)
         }
-    }
 
-    renderNextButton = () => {
-        const { currentPage, goToPage, totalPages } = this.props;
-
-        const nextPage = currentPage + 1;
-
-        if (currentPage < totalPages) {
-            return (<a href="#" className="next" data-direction="prev" onClick={this.handleNextClick}></a>);
+        // only print the button if there is a next/prev page to navigate to
+        if ( (direction < 0 && currentPage > 1) || (direction > 0 && currentPage < totalPages) ) {
+            return <PaginationArrow {...arrowProps} />;
         } else {
             return;
         }
@@ -70,12 +42,6 @@ class Pagination extends Component {
         );
     }
 
-    isCurrentPage = (pageNum) => {
-        const { currentPage } = this.props;
-
-        return pageNum === currentPage;
-    }
-
     renderPageList = () => {
         const { currentPage, pageRange, totalPages } = this.props;
 
@@ -85,14 +51,16 @@ class Pagination extends Component {
             : totalPages;
 
         // generate array of length listLength where each entry a number, in order
-        const pageArray = Array(listLength).fill().map((el, index) => index + 1 );
-        console.log(pageArray);
+        const pageArray = Array(listLength).fill().map((el, index) => el );
+
+        const emptyPageArray = Array(listLength);
+
 
         const pageList = pageArray.map((el, index) => {
             // if (currentPage === 1 && el === 1) {
             //     return (""); // special case - don't print page 1 if on first page
             // }
-            if (this.isCurrentPage(el)) {
+            if (el === currentPage) {
                 return (<span key={index} className="current-page">{el}</span>);
             } else {
                 return (<a key={index} href="#">{el}</a>);
@@ -111,13 +79,13 @@ class Pagination extends Component {
             <div className="pnlResults">
                 <div className="pages">
 
-                    {this.renderPrevButton()}
+                    {this.renderArrow(-1)}
 
                     {this.renderPageXofY()}
 
                     {this.renderPageList()}
 
-                    {this.renderNextButton()}
+                    {this.renderArrow(1)}
 
                 </div>
             </div>

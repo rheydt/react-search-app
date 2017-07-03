@@ -26,7 +26,6 @@ class AllDocumentsApp extends Component {
     }
 
     addOrRemoveFilter = (changedFilter) => {
-
         const prevSelected = this.state.selected;
 
         const newSelected = prevSelected.includes(changedFilter)
@@ -69,14 +68,13 @@ class AllDocumentsApp extends Component {
         };
 
         return (
-
             <div>
                 <Controls {...controlsProps} />
                 <Pagination {...paginationProps}/>
                 <ResultsSection {...resultsProps}/>
                 <Pagination {...paginationProps}/>
             </div>
-        )
+        );
     }
 }
 

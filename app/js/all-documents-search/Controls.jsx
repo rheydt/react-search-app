@@ -16,7 +16,6 @@ class Controls extends Component {
     }
 
     render = () => {
-
         const { filters, selected, filtersLabel, searchLabel, searchButtonText, addOrRemoveFilter } = this.props;
 
         let filtersProps = {
@@ -37,7 +36,7 @@ class Controls extends Component {
                 </fieldset>
 
             </form>
-        )
+        );
     }
 }
 
