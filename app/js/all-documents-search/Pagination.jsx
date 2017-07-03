@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { number, func } from 'prop-types';
 
 import PaginationArrow from './PaginationArrow.jsx';
+import PaginationList from './PaginationList.jsx';
 
 
 class Pagination extends Component {
@@ -42,39 +43,16 @@ class Pagination extends Component {
         );
     }
 
-    renderPageList = () => {
-        const { currentPage, pageRange, totalPages } = this.props;
-
-        // list length is totalPages or pageRange, whichever is smaller
-        const listLength = totalPages > pageRange
-            ? pageRange
-            : totalPages;
-
-        // generate array of length listLength where each entry a number, in order
-        const pageArray = Array(listLength).fill().map((el, index) => el );
-
-        const emptyPageArray = Array(listLength);
-
-
-        const pageList = pageArray.map((el, index) => {
-            // if (currentPage === 1 && el === 1) {
-            //     return (""); // special case - don't print page 1 if on first page
-            // }
-            if (el === currentPage) {
-                return (<span key={index} className="current-page">{el}</span>);
-            } else {
-                return (<a key={index} href="#">{el}</a>);
-            }
-        });
-
-        return (
-            <span className="pnlGroup">
-                {pageList}
-            </span>
-        );
-    }
-
     render = () => {
+        const { currentPage, totalPages, pageRange, goToPage } = this.props;
+
+        const pageListProps = {
+            currentPage: currentPage,
+            totalPages: totalPages,
+            pageRange: pageRange,
+            goToPage: goToPage
+        };
+
         return (
             <div className="pnlResults">
                 <div className="pages">
@@ -83,7 +61,7 @@ class Pagination extends Component {
 
                     {this.renderPageXofY()}
 
-                    {this.renderPageList()}
+                    <PaginationList {...pageListProps} />
 
                     {this.renderArrow(1)}
 
