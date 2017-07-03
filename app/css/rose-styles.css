@@ -62,3 +62,15 @@
     .all-documents-search .pagination {
         display: inline;
     }
+
+    /* make pagination links blue to differentiate current page (which is black)
+       NOTE: previously only blue on hover
+    */
+    .all-documents-search .pnlGroup a {
+        color: #3979A6;
+    }
+
+    /* normalize spacing between pagination span and links */
+    .all-documents-search .pnlGroup .current-page {
+        padding: 0 10px;
+    }

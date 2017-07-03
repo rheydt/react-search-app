@@ -70,19 +70,38 @@ class Pagination extends Component {
         );
     }
 
+    isCurrentPage = (pageNum) => {
+        const { currentPage } = this.props;
+
+        return pageNum === currentPage;
+    }
+
     renderPageList = () => {
-        const { currentPage, pageRange } = this.props;
+        const { currentPage, pageRange, totalPages } = this.props;
+
+        // list length is totalPages or pageRange, whichever is smaller
+        const listLength = totalPages > pageRange
+            ? pageRange
+            : totalPages;
+
+        // generate array of length listLength where each entry a number, in order
+        const pageArray = Array(listLength).fill().map((el, index) => index + 1 );
+        console.log(pageArray);
+
+        const pageList = pageArray.map((el, index) => {
+            // if (currentPage === 1 && el === 1) {
+            //     return (""); // special case - don't print page 1 if on first page
+            // }
+            if (this.isCurrentPage(el)) {
+                return (<span key={index} className="current-page">{el}</span>);
+            } else {
+                return (<a key={index} href="#">{el}</a>);
+            }
+        });
+
         return (
             <span className="pnlGroup">
-                <a href="#">2</a>
-                <a href="#">3</a>
-                <a href="#">4</a>
-                <a href="#">5</a>
-                <a href="#">6</a>
-                <a href="#">7</a>
-                <a href="#">8</a>
-                <a href="#">9</a>
-                <a href="#">10</a>
+                {pageList}
             </span>
         );
     }
