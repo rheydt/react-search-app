@@ -40,19 +40,26 @@ class PaginationList extends Component {
         }
     }
 
+    handleClick = (e) => {
+        const { goToPage } = this.props;
+
+        e.preventDefault();
+
+        const clickedNum = $(e.target).text();
+        goToPage(parseInt(clickedNum));
+    }
+
     render = () => {
-        const { currentPage, totalPages, pageRange, goToPage } = this.props;
+        const { currentPage, totalPages, pageRange } = this.props;
 
-        const pageNums = this.generatePagesArray();
-
-        const pageElements = pageNums.map((el, index) => {
+        const pageElements = this.generatePagesArray().map((el, index) => {
             if (currentPage === 1 && el === 1) {
                 // special case - don't print page 1 if on first page
                 return ("");
             } else if (el === currentPage) {
                 return (<span key={index} className="current-page">{el}</span>);
             } else {
-                return (<a key={index} href="#">{el}</a>);
+                return (<a key={index} href="#" onClick={this.handleClick}>{el}</a>);
             }
         });
 
