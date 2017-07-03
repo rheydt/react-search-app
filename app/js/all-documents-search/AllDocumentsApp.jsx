@@ -47,34 +47,30 @@ class AllDocumentsApp extends Component {
     }
 
     queryBuilder = () => {
+        const { countryCode, searchTerm, selected } = this.state;
 
         // const   endpointBase = "http://devcm/api/imf/countrysearch/search?country=196ddeb5-0262-4cc1-8f29-d808b31b4eeb&searchTerm=test&selectedFilters=test&selectedFilters=second"
         const   endpointBase = "",
                 countryBase = "country=",
                 searchTermBase = "searchTerm=",
                 selectedFieldBase = "selectedFilters=";
-                // numItemsBase = "numItems=",
-                // pageNumBase = "pageNum=";
 
-        // get selected filters, add blank entry if none are present
-        let filterIds = this.state.selected.length <= 0
-            ? [""]
-            : this.state.selected;
+        // build country query string (required param)
+        const countryString = countryBase + countryCode;
 
-        // build filter query string
-        let filterStrings = filterIds.map(function(id) { return selectedFieldBase + id; }),
-            filterQuery = filterStrings.join("&");
+        // build filter query string (optional param)
+        const filterStrings = selected.map(function(filter) { return selectedFieldBase + filter; });
+        const filterQuery = filterStrings.length > 0
+            ? "& " + filterStrings.join("&")
+            : null;
 
-        // build search term query string
-        let searchTermString = searchTermBase + this.state.searchTerm;
-
-        // build other query strings
-        // let sortQuery = sortOrderBase + this.state.sortOrder,
-        //     numQuery = numItemsBase + this.state.numItems,
-        //     pageQuery = pageNumBase + this.state.pageNum;
+        // build search term query string (optional param)
+        const searchTermString = searchTerm
+            ? "&" + searchTermBase + this.state.searchTerm
+            : null;
 
         // put it all together
-        let queryString = [searchTermString, filterQuery ].join("&");
+        const queryString = [countryString, searchTermString, filterQuery ].join("");
 
         return endpointBase + queryString;
     }
@@ -105,7 +101,6 @@ class AllDocumentsApp extends Component {
                 // })
             })
     }
-
 
     render = () => {
 
