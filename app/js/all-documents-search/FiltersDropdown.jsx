@@ -18,14 +18,19 @@ class FiltersDropdown extends Component {
         const listItems = array.slice(sliceFrom, sliceTo);
 
         const listElements = listItems.map((item, index) =>
-            <FilterOption key={index} data={item} addOrRemoveFilter={this.props.addOrRemoveFilter}/>
+            <FilterOption key={index} data={item} addOrRemoveFilter={this.props.addOrRemoveFilter} isSelected={this.isSelected(item)} />
         );
 
         return listElements;
     }
 
-    render = () => {
+    isSelected = (item) => {
+        const { selected } = this.props;
 
+        return selected.includes(item.text);
+    }
+
+    render = () => {
         const { filters, isOpen } = this.props;
 
         // split the list of options into 2 even (or almost even) groups

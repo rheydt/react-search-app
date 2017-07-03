@@ -10,7 +10,6 @@ class ResultsTag extends Component {
     }
 
     handleClick = (e) => {
-
         const {tag, addOrRemoveFilter} = this.props;
 
         e.preventDefault();
@@ -18,7 +17,6 @@ class ResultsTag extends Component {
     }
 
     render = () => {
-
         const { tag } = this.props;
 
         return (

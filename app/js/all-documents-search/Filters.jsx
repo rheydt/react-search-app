@@ -19,8 +19,8 @@ class Filters extends Component {
     }
 
     componentDidUpdate = (prevProps, prevState) => {
-        // when the menu is open, add an event listener
-        // to watch for clicks outside the dropdown or field
+        // when the menu is open, watch for clicks
+        // outside the dropdown and field
         if (this.state.isOpen) {
             document.addEventListener("click", this.handleClickAway, true);
         } else {

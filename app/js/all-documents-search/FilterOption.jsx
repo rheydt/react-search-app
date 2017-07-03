@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { shape, string, number, func } from 'prop-types';
+import { shape, string, number, func, bool } from 'prop-types';
 
 
 class FilterOption extends Component {
@@ -9,7 +9,8 @@ class FilterOption extends Component {
             hits: number,
             text: string
         }),
-        addOrRemoveFilter: func
+        addOrRemoveFilter: func,
+        isSelected: bool
     }
 
     handleClick = (e) => {
@@ -24,10 +25,11 @@ class FilterOption extends Component {
     render = () => {
 
         const { hits, text } = this.props.data;
+        const { isSelected } = this.props;
 
         return (
             <li>
-                <input type="checkbox" name={text} value={text} onClick={this.handleClick}/>
+                <input type="checkbox" name={text} value={text} onClick={this.handleClick} checked={isSelected}/>
                 <label htmlFor={text}>{text} ({hits})</label>
             </li>
         )

@@ -27,8 +27,6 @@ class AllDocumentsApp extends Component {
 
     addOrRemoveFilter = (changedFilter) => {
 
-        console.log("adding or removing filter");
-
         const prevSelected = this.state.selected;
 
         const newSelected = prevSelected.includes(changedFilter)
