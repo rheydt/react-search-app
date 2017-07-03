@@ -14,7 +14,7 @@ class AllDocumentsApp extends Component {
         results: fakeData.results,
         totalHits: fakeData.totalHits,
         noResultsMessage: "No results found.",
-        currentPage: fakeData.currentPage,
+        currentPage: fakeData.currentPage + 1,
         totalPages: fakeData.totalPages,
         pageRange: 10,
         filters: fakeData.filters,
@@ -38,6 +38,12 @@ class AllDocumentsApp extends Component {
         });
     }
 
+    goToPage = (newPage) => {
+        this.setState({
+            currentPage: newPage
+        });
+    }
+
     render = () => {
 
         let controlsProps = {
@@ -52,7 +58,8 @@ class AllDocumentsApp extends Component {
         let paginationProps = {
             currentPage: this.state.currentPage,
             totalPages: this.state.totalPages,
-            pageRange: this.state.pageRange
+            pageRange: this.state.pageRange,
+            goToPage: this.goToPage
         };
 
         let resultsProps = {

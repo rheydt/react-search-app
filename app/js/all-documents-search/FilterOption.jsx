@@ -14,7 +14,6 @@ class FilterOption extends Component {
     }
 
     handleClick = (e) => {
-
         const { addOrRemoveFilter } = this.props;
 
         const value = $(e.target:checked).val();
@@ -23,7 +22,6 @@ class FilterOption extends Component {
     }
 
     render = () => {
-
         const { hits, text } = this.props.data;
         const { isSelected } = this.props;
 

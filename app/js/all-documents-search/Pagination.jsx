@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { number } from 'prop-types';
+import { number, func } from 'prop-types';
 
 
 class Pagination extends Component {
@@ -7,7 +7,8 @@ class Pagination extends Component {
     static propTypes = {
         currentPage: number,
         totalPages: number,
-        pageRange: number
+        pageRange: number,
+        goToPage: func
     }
 
     state =  {
@@ -15,17 +16,47 @@ class Pagination extends Component {
         showNext: true
     }
 
+    handleNextOrPrevClick = (e) => {
+        const { currentPage, goToPage } = this.props;
+
+        e.preventDefault();
+        console.log(e.target);
+    }
+
+
+    handlePrevClick = (e) => {
+        const { currentPage, goToPage } = this.props;
+
+        e.preventDefault();
+        goToPage(currentPage - 1);
+    }
+
+    handleNextClick = (e) => {
+        const { currentPage, goToPage } = this.props;
+
+        e.preventDefault();
+        goToPage(currentPage + 1);
+    }
+
     renderPrevButton = () => {
-        if (this.state.showPrev) {
-            return (<a href="#" className="previous"></a>);
+        const { currentPage, goToPage } = this.props;
+
+        const prevPage = currentPage - 1;
+
+        if (currentPage > 1) {
+            return (<a href="#" className="previous" data-direction="next" onClick={this.handlePrevClick}></a>);
         } else {
             return;
         }
     }
 
     renderNextButton = () => {
-        if (this.state.showNext) {
-            return (<a href="#" className="next"></a>);
+        const { currentPage, goToPage, totalPages } = this.props;
+
+        const nextPage = currentPage + 1;
+
+        if (currentPage < totalPages) {
+            return (<a href="#" className="next" data-direction="prev" onClick={this.handleNextClick}></a>);
         } else {
             return;
         }
@@ -40,6 +71,7 @@ class Pagination extends Component {
     }
 
     renderPageList = () => {
+        const { currentPage, pageRange } = this.props;
         return (
             <span className="pnlGroup">
                 <a href="#">2</a>
@@ -54,7 +86,6 @@ class Pagination extends Component {
             </span>
         );
     }
-
 
     render = () => {
         return (
