@@ -46,10 +46,10 @@ class PaginationList extends Component {
         const pageNums = this.generatePagesArray();
 
         const pageElements = pageNums.map((el, index) => {
-            // if (currentPage === 1 && el === 1) {
-            //     return (""); // special case - don't print page 1 if on first page
-            // }
-            if (el === currentPage) {
+            if (currentPage === 1 && el === 1) {
+                // special case - don't print page 1 if on first page
+                return ("");
+            } else if (el === currentPage) {
                 return (<span key={index} className="current-page">{el}</span>);
             } else {
                 return (<a key={index} href="#">{el}</a>);
