@@ -11,20 +11,41 @@ class PaginationList extends Component {
         goToPage: func
     }
 
-    render = () => {
-        const { currentPage, totalPages, pageRange, goToPage } = this.props;
+    generatePagesArray = () => {
+        const { currentPage, totalPages, pageRange } = this.props;
+
+        // make array of indexes from 0 to totalPages
+        // note: our array will start the count at 1
+        const totalPagesArray = Array(totalPages).fill().map((el, i) => i + 1);
 
         // list length is totalPages or pageRange, whichever is smaller
         const listLength = totalPages > pageRange
             ? pageRange
             : totalPages;
 
-        // generate array of length listLength where each entry a number, in order
-        const pageArray = Array(listLength).fill().map((el, index) => index + 1);
+        // determine # of items to show on each side of current page item
+        const midPoint = Math.ceil(pageRange / 2);
 
-        const emptyPageArray = Array(listLength);
+        // set boundries of page list, fixing the list at each extremity
+        // so pages shown are never negative or more than totalPages
+        if (currentPage <= midPoint) {
+            // if currentPage is near the start of the list
+            return totalPagesArray.slice(0, listLength);
+        } else if (currentPage + midPoint >= totalPages) {
+            // if currentPage is near the end of the list
+            return totalPagesArray.slice(totalPages - pageRange, totalPages);
+        } else {
+            // if current page is somewhere in between
+            return totalPagesArray.slice(currentPage - midPoint, currentPage + midPoint);
+        }
+    }
 
-        const pageList = pageArray.map((el, index) => {
+    render = () => {
+        const { currentPage, totalPages, pageRange, goToPage } = this.props;
+
+        const pageNums = this.generatePagesArray();
+
+        const pageElements = pageNums.map((el, index) => {
             // if (currentPage === 1 && el === 1) {
             //     return (""); // special case - don't print page 1 if on first page
             // }
@@ -38,7 +59,7 @@ class PaginationList extends Component {
 
         return (
             <span className="pnlGroup">
-                {pageList}
+                {pageElements}
             </span>
         );
     }
