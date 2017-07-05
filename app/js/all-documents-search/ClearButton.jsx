@@ -13,9 +13,7 @@ class ClearButton extends Component {
         const { clearFilters } = this.props;
 
         e.preventDefault();
-        console.log("clearing filters");
         clearFilters();
-
     }
 
     render = () => {
