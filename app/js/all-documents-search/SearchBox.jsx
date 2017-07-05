@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import { string } from 'prop-types';
 
-import Filters from './Filters.jsx';
-import SearchBox from './SearchBox.jsx';
 
-
-class Controls extends Component {
+class SearchBox extends Component {
 
     static propTypes = {
         searchLabel: searchLabel
@@ -27,4 +24,4 @@ class Controls extends Component {
     }
 }
 
-export default Controls;
+export default SearchBox;
