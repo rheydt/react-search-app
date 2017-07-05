@@ -12,16 +12,19 @@ class Controls extends Component {
     static propTypes = {
         filters: array,
         selected: array,
+        searchTerm: string,
         filtersLabel: string,
         searchLabel: string,
         searchButtonText: string,
         clearButtonText: string,
+        updateSearchValue: func,
         addOrRemoveFilter: func,
-        clearFilters: func
+        clearFilters: func,
+        runSearch: func
     }
 
     render = () => {
-        const { filters, selected, filtersLabel, searchLabel, searchButtonText, clearButtonText, addOrRemoveFilter, clearFilters } = this.props;
+        const { filters, selected, searchTerm, updateSearchValue, filtersLabel, searchLabel, searchButtonText, clearButtonText, addOrRemoveFilter, clearFilters, runSearch } = this.props;
 
         const filtersProps = {
             filters: filters,
@@ -31,8 +34,11 @@ class Controls extends Component {
         }
 
         const searchBoxProps = {
+            searchTerm: searchTerm,
+            updateSearchValue: updateSearchValue,
             submitLabel: searchButtonText,
-            inputPlaceholder: searchLabel
+            inputPlaceholder: searchLabel,
+            runSearch: runSearch
         }
 
         const clearButtonProps = {

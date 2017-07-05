@@ -18,7 +18,7 @@ class AllDocumentsApp extends Component {
         totalPages: 20,
         filters: fakeData.filters,
         selected: fakeData.selectedFilters || [],
-        searchTerm: fakeData.searchTerm,
+        searchTerm: fakeData.searchTerm || "",
         requestFailed: false,
         countryCode: "ABC-123",
         pageRange: 10,
@@ -36,21 +36,25 @@ class AllDocumentsApp extends Component {
             ?   prevSelected.filter(function(el) { return el !== changedFilter; })
             :   prevSelected.concat([changedFilter]);
 
-        this.setState({
-            selected: newSelected
-        });
+        this.setState({ selected: newSelected });
+
+        this.runSearch();
     }
 
     clearFilters = () => {
-        this.setState({
-            selected: []
-        });
+        this.setState({ selected: [] });
+
+        this.runSearch();
     }
 
     goToPage = (newPage) => {
-        this.setState({
-            currentPage: newPage
-        });
+        this.setState({ currentPage: newPage });
+
+        this.runSearch();
+    }
+
+    updateSearchValue = (newValue) => {
+        this.setState({ searchTerm: newValue });
     }
 
     queryBuilder = () => {
@@ -74,39 +78,48 @@ class AllDocumentsApp extends Component {
         // build search term query string (optional param)
         const searchTermString = searchTerm
             ? "&" + searchTermBase + this.state.searchTerm
-            : null;
+            : undefined;
 
         // put it all together
-        const queryString = [countryString, searchTermString, filterQuery ].join("");
+        const queryString = [countryString, searchTermString, filterQuery].join("");
 
         return endpointBase + queryString;
     }
 
     requestResults = (url) => {
-        fetch(url)
-            .then(response => {
-                if (!response.ok) {
-                    this.setState({
-                        requestFailed: true
-                    });
-                    throw Error("Network request failed");
-                }
-                console.log("response:", response);
-                return response
-            })
-            .then(d => d.json())
-            .then(d => {
-                console.log("data:", d);
-                // this.setState({
-                //     results: d.items,
-                //     hasMoreItems: d.hasMoreItems
-                // })
-            }, () => {
-                // this.setState({
-                //     results: [],
-                //     hasMoreItems: false
-                // })
-            })
+        console.log("requesting results from ", url);
+        // fetch(url)
+        //     .then(response => {
+        //         if (!response.ok) {
+        //             this.setState({
+        //                 requestFailed: true
+        //             });
+        //             throw Error("Network request failed");
+        //         }
+        //         console.log("response:", response);
+        //         return response
+        //     })
+        //     .then(d => d.json())
+        //     .then(d => {
+        //         console.log("data:", d);
+        //         // this.setState({
+        //         //     results: d.items,
+        //         //     hasMoreItems: d.hasMoreItems
+        //         // })
+        //     }, () => {
+        //         // this.setState({
+        //         //     results: [],
+        //         //     hasMoreItems: false
+        //         // })
+        //     })
+    }
+
+    runSearch = () => {
+        console.log("running search");
+
+        const url = this.queryBuilder();
+
+        this.requestResults(url);
     }
 
     render = () => {
@@ -114,11 +127,14 @@ class AllDocumentsApp extends Component {
         let controlsProps = {
             filters: this.state.filters,
             selected: this.state.selected,
+            searchTerm: this.state.searchTerm,
             filtersLabel: this.state.filtersLabel,
             searchLabel: this.state.searchLabel,
             searchButtonText: this.state.searchButtonText,
             clearButtonText: this.state.clearButtonText,
+            updateSearchValue: this.updateSearchValue,
             addOrRemoveFilter: this.addOrRemoveFilter,
+            runSearch: this.runSearch,
             clearFilters: this.clearFilters
         };
 
@@ -134,8 +150,6 @@ class AllDocumentsApp extends Component {
             noResultsMessage: this.state.noResultsMessage,
             addOrRemoveFilter: this.addOrRemoveFilter
         };
-
-        console.log(this.queryBuilder());
 
         return (
             <div>
