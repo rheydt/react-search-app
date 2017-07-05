@@ -25,7 +25,8 @@ class AllDocumentsApp extends Component {
         noResultsMessage: "No results found.",
         filtersLabel: "Select Filters",
         searchLabel: "Country Specific Search",
-        searchButtonText : "Search"
+        searchButtonText : "Search",
+        clearButtonText: "Clear"
     }
 
     addOrRemoveFilter = (changedFilter) => {
@@ -110,6 +111,7 @@ class AllDocumentsApp extends Component {
             filtersLabel: this.state.filtersLabel,
             searchLabel: this.state.searchLabel,
             searchButtonText: this.state.searchButtonText,
+            clearButtonText: this.state.clearButtonText,
             addOrRemoveFilter: this.addOrRemoveFilter
         };
 
