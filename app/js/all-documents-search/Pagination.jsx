@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { number, func } from 'prop-types';
+import { number, string, func } from 'prop-types';
 
 import PaginationArrow from './PaginationArrow.jsx';
 import PaginationList from './PaginationList.jsx';
@@ -11,6 +11,7 @@ class Pagination extends Component {
         currentPage: number,
         totalPages: number,
         pageRange: number,
+        paginationText: string,
         goToPage: func
     }
 
@@ -35,11 +36,31 @@ class Pagination extends Component {
         }
     }
 
+    wrapStringInSpan = (string) => {
+        return (
+            <span>{string}</span>
+        );
+    }
+
     renderPageXofY = () => {
-        const { currentPage, totalPages } = this.props;
+        const { currentPage, totalPages, paginationText } = this.props;
+
+        // replace {current} and {total} with values from props
+        const currentPattern = /{current}/g;
+        const totalPattern = /{total}/g;
+        const textWithNums = paginationText.replace(currentPattern, currentPage).replace(totalPattern, totalPages);
+
+        // split text into array with 3 parts (before match, match, and after match)
+        const splitString = textWithNums.split(/{bold}(.*?){\/bold}/);
+        const beforeMatch = splitString[0];
+        const match = splitString[1];
+        const afterMatch = splitString[2];
+
+        // wrap match in span
+        const matchInsideSpans = this.wrapStringInSpan(match);
 
         return (
-            <div className="pagination"><span>Page {currentPage}</span> of {totalPages}</div>
+            <div className="pagination">{beforeMatch}{matchInsideSpans}{afterMatch}</div>
         );
     }
 

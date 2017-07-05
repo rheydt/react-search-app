@@ -26,7 +26,8 @@ class AllDocumentsApp extends Component {
         filtersLabel: "Select Filters",
         searchLabel: "Country Specific Search",
         searchButtonText : "Search",
-        clearButtonText: "Clear Filters"
+        clearButtonText: "Clear Filters",
+        paginationText: "{bold}Page: {current}{/bold} of {total}"
     }
 
     addOrRemoveFilter = (changedFilter) => {
@@ -138,6 +139,7 @@ class AllDocumentsApp extends Component {
             currentPage: this.state.currentPage,
             totalPages: this.state.totalPages,
             pageRange: this.state.pageRange,
+            paginationText: this.state.paginationText,
             goToPage: this.goToPage
         };
 
