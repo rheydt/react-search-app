@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { array, string, func } from 'prop-types';
 
 import Filters from './Filters.jsx';
+import SearchBox from './SearchBox.jsx';
 
 
 class Controls extends Component {
@@ -25,13 +26,17 @@ class Controls extends Component {
             addOrRemoveFilter: addOrRemoveFilter
         }
 
+        let searchBoxProps = {
+            searchLabel: searchLabel
+        }
+
         return (
             <form className="form-archive">
 
                 <Filters {...filtersProps}/>
 
                 <fieldset className="cnt-fields cnt-fields--search-input">
-                    <input type="text" className="cnt-search" placeholder={searchLabel}></input>
+                    <SearchBox {...searchBoxProps} />
                     <button type="submit" className="text">{searchButtonText}</button>
                 </fieldset>
 
