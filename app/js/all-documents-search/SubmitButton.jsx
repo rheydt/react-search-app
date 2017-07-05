@@ -8,11 +8,16 @@ class SubmitButton extends Component {
         label: string
     }
 
+    handleClick = (e) => {
+        e.preventDefault();
+        console.log("submitting search");
+    }
+
     render = () => {
         const { label } = this.props;
 
         return (
-            <button type="submit" className="text">{label}</button>
+            <button type="submit" className="text" onClick={this.handleClick}>{label}</button>
         );
     }
 }
