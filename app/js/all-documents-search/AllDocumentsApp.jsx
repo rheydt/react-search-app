@@ -72,7 +72,7 @@ class AllDocumentsApp extends Component {
         // build filter query string (optional param)
         const filterStrings = selected.map(function(filter) { return selectedFieldBase + filter; });
         const filterQuery = filterStrings.length > 0
-            ? "& " + filterStrings.join("&")
+            ? "&" + filterStrings.join("&")
             : null;
 
         // build search term query string (optional param)
@@ -103,20 +103,16 @@ class AllDocumentsApp extends Component {
         //     .then(d => {
         //         console.log("data:", d);
         //         // this.setState({
-        //         //     results: d.items,
-        //         //     hasMoreItems: d.hasMoreItems
+        //         //     results: d.items
         //         // })
         //     }, () => {
         //         // this.setState({
-        //         //     results: [],
-        //         //     hasMoreItems: false
+        //         //     results: []
         //         // })
         //     })
     }
 
     runSearch = () => {
-        console.log("running search");
-
         const url = this.queryBuilder();
 
         this.requestResults(url);
