@@ -3,6 +3,8 @@ import { array, string, func } from 'prop-types';
 
 import Filters from './Filters.jsx';
 import SearchBox from './SearchBox.jsx';
+import SubmitButton from './SubmitButton.jsx';
+import ClearButton from './ClearButton.jsx';
 
 
 class Controls extends Component {
@@ -14,11 +16,12 @@ class Controls extends Component {
         searchLabel: string,
         searchButtonText: string,
         clearButtonText: string,
-        addOrRemoveFilter: func
+        addOrRemoveFilter: func,
+        clearFilters: func
     }
 
     render = () => {
-        const { filters, selected, filtersLabel, searchLabel, searchButtonText, clearButtonText, addOrRemoveFilter } = this.props;
+        const { filters, selected, filtersLabel, searchLabel, searchButtonText, clearButtonText, addOrRemoveFilter, clearFilters } = this.props;
 
         let filtersProps = {
             filters: filters,
@@ -36,7 +39,7 @@ class Controls extends Component {
                 <fieldset className="cnt-fields cnt-fields--search-input">
                     <SearchBox searchLabel={searchLabel} />
                     <SubmitButton searchButtonText={searchButtonText} />
-                    <ClearButton clearButtonText={clearButtonText} />
+                    <ClearButton clearButtonText={clearButtonText} method={clearFilters} />
                 </fieldset>
 
             </form>

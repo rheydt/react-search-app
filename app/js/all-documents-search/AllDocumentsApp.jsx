@@ -26,7 +26,7 @@ class AllDocumentsApp extends Component {
         filtersLabel: "Select Filters",
         searchLabel: "Country Specific Search",
         searchButtonText : "Search",
-        clearButtonText: "Clear"
+        clearButtonText: "Clear Filters"
     }
 
     addOrRemoveFilter = (changedFilter) => {
@@ -38,6 +38,12 @@ class AllDocumentsApp extends Component {
 
         this.setState({
             selected: newSelected
+        });
+    }
+
+    clearFilters = () => {
+        this.setState({
+            selected: []
         });
     }
 
@@ -112,7 +118,8 @@ class AllDocumentsApp extends Component {
             searchLabel: this.state.searchLabel,
             searchButtonText: this.state.searchButtonText,
             clearButtonText: this.state.clearButtonText,
-            addOrRemoveFilter: this.addOrRemoveFilter
+            addOrRemoveFilter: this.addOrRemoveFilter,
+            clearFilters: this.clearFilters
         };
 
         let paginationProps = {
