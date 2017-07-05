@@ -8,18 +8,11 @@ class SearchBox extends Component {
         label: string
     }
 
-    handleOnChange = (e) => {
-        e.preventDefault();
-        console.log("handle on change");
-
-        console.log(e.target);
-    }
-
     render = () => {
         const { label } = this.props;
 
         return (
-            <input type="text" className="cnt-search" placeholder={label} onChange={this.handleOnChange}></input>
+            <input type="text" className="cnt-search" placeholder={label}></input>
         );
     }
 }
