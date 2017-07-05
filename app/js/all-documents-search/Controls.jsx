@@ -13,11 +13,12 @@ class Controls extends Component {
         filtersLabel: string,
         searchLabel: string,
         searchButtonText: string,
+        clearButtonText: string,
         addOrRemoveFilter: func
     }
 
     render = () => {
-        const { filters, selected, filtersLabel, searchLabel, searchButtonText, addOrRemoveFilter } = this.props;
+        const { filters, selected, filtersLabel, searchLabel, searchButtonText, clearButtonText, addOrRemoveFilter } = this.props;
 
         let filtersProps = {
             filters: filters,
@@ -26,9 +27,6 @@ class Controls extends Component {
             addOrRemoveFilter: addOrRemoveFilter
         }
 
-        let searchBoxProps = {
-            searchLabel: searchLabel
-        }
 
         return (
             <form className="form-archive">
@@ -36,8 +34,9 @@ class Controls extends Component {
                 <Filters {...filtersProps}/>
 
                 <fieldset className="cnt-fields cnt-fields--search-input">
-                    <SearchBox {...searchBoxProps} />
-                    <button type="submit" className="text">{searchButtonText}</button>
+                    <SearchBox searchLabel={searchLabel} />
+                    <SubmitButton searchButtonText={searchButtonText} />
+                    <ClearButton clearButtonText={clearButtonText} />
                 </fieldset>
 
             </form>
