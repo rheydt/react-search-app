@@ -1,5 +1,4 @@
 require('jquery');
-import { initNewsListing } from "./news-listing/index.js";
 import { initAllDocumentsSearch } from "./all-documents-search/index.js";
 
 
