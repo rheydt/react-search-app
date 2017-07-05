@@ -5,14 +5,23 @@ import { string } from 'prop-types';
 class SearchBox extends Component {
 
     static propTypes = {
-        label: string
+        submitLabel: string,
+        inputPlaceholder: string
+    }
+
+    handleClick = (e) => {
+        e.preventDefault();
+        console.log("submitting search");
     }
 
     render = () => {
-        const { label } = this.props;
+        const { submitLabel, inputPlaceholder } = this.props;
 
         return (
-            <input type="text" className="cnt-search" placeholder={label}></input>
+            <div>
+                <input type="text" className="cnt-search" placeholder={inputPlaceholder}></input>
+                <button type="submit" className="text" onClick={this.handleClick}>{submitLabel}</button>
+            </div>
         );
     }
 }

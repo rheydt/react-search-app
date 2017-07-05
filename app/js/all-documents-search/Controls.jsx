@@ -30,6 +30,11 @@ class Controls extends Component {
             addOrRemoveFilter: addOrRemoveFilter
         }
 
+        const searchBoxProps = {
+            submitLabel: searchButtonText,
+            inputPlaceholder: searchLabel
+        }
+
         const clearButtonProps = {
             label: clearButtonText,
             clearFilters: clearFilters
@@ -42,8 +47,7 @@ class Controls extends Component {
                 <Filters {...filtersProps}/>
 
                 <fieldset className="cnt-fields cnt-fields--search-input">
-                    <SearchBox label={searchLabel} />
-                    <SubmitButton label={searchButtonText} />
+                    <SearchBox {...searchBoxProps} />
                     <ClearButton {...clearButtonProps} />
                 </fieldset>
 
