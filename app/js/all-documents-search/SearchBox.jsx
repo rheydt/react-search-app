@@ -5,7 +5,7 @@ import { string } from 'prop-types';
 class SearchBox extends Component {
 
     static propTypes = {
-        searchLabel: string
+        label: string
     }
 
     handleOnChange = (e) => {
@@ -16,10 +16,10 @@ class SearchBox extends Component {
     }
 
     render = () => {
-        const { searchLabel } = this.props;
+        const { label } = this.props;
 
         return (
-            <input type="text" className="cnt-search" placeholder={searchLabel} onChange={this.handleOnChange}></input>
+            <input type="text" className="cnt-search" placeholder={label} onChange={this.handleOnChange}></input>
         );
     }
 }

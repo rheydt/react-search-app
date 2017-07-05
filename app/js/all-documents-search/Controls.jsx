@@ -23,11 +23,16 @@ class Controls extends Component {
     render = () => {
         const { filters, selected, filtersLabel, searchLabel, searchButtonText, clearButtonText, addOrRemoveFilter, clearFilters } = this.props;
 
-        let filtersProps = {
+        const filtersProps = {
             filters: filters,
             selected: selected,
             label: filtersLabel,
             addOrRemoveFilter: addOrRemoveFilter
+        }
+
+        const clearButtonProps = {
+            label: clearButtonText,
+            clearFilters: clearFilters
         }
 
 
@@ -37,9 +42,9 @@ class Controls extends Component {
                 <Filters {...filtersProps}/>
 
                 <fieldset className="cnt-fields cnt-fields--search-input">
-                    <SearchBox searchLabel={searchLabel} />
-                    <SubmitButton searchButtonText={searchButtonText} />
-                    <ClearButton clearButtonText={clearButtonText} method={clearFilters} />
+                    <SearchBox label={searchLabel} />
+                    <SubmitButton label={searchButtonText} />
+                    <ClearButton {...clearButtonProps} />
                 </fieldset>
 
             </form>

@@ -5,14 +5,14 @@ import { string } from 'prop-types';
 class SubmitButton extends Component {
 
     static propTypes = {
-        searchButtonText: string
+        label: string
     }
 
     render = () => {
-        const { searchButtonText } = this.props;
+        const { label } = this.props;
 
         return (
-            <button type="submit" className="text">{searchButtonText}</button>
+            <button type="submit" className="text">{label}</button>
         );
     }
 }

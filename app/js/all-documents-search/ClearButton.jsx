@@ -5,7 +5,7 @@ import { string, func } from 'prop-types';
 class ClearButton extends Component {
 
     static propTypes = {
-        clearButtonText: string,
+        label: string,
         clearFilters: func
     }
 
@@ -13,16 +13,16 @@ class ClearButton extends Component {
         const { clearFilters } = this.props;
 
         e.preventDefault();
-        console.log("clearning filters");
+        console.log("clearing filters");
         clearFilters();
 
     }
 
     render = () => {
-        const { clearButtonText } = this.props;
+        const { label } = this.props;
 
         return (
-            <button className="text reset" onClick={this.handleClick}>{clearButtonText}</button>
+            <button className="text reset" onClick={this.handleClick}>{label}</button>
         );
     }
 }
