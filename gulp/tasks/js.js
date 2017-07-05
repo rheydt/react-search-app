@@ -38,13 +38,6 @@ module.exports = function jsTask(config, env){
         //                 - don't include files that have "standalone: true"
         //   watch       : rerun this files's task when these files change (can be an array of globs)
         files: [
-            // {
-            //     gulpTaskId: "js-polyfill",
-            //     entry: config.root + "/polyfill/index.js",
-            //     filename: "polyfill.js",
-            //     standalone: true,
-            //     watch: config.root + "/polyfill/**"
-            // },
             {
                 gulpTaskId: "js-index",
                 entry: config.root + "/js/index.js",
@@ -54,24 +47,6 @@ module.exports = function jsTask(config, env){
                     config.root + "/js/**/*.jsx"
                 ]
             }
-            // {
-            //     gulpTaskId: "js-all-documents-search",
-            //     entry: config.root + "/js/all-documents-search/index.js",
-            //     filename: "all-documents-search.js",
-            //     watch: [
-            //         config.root + "/js/a//-documents-search/**/*.js",
-            //         config.root + "/js/a//-documents-search/**/*.jsx"
-            //     ]
-            // },
-            // {
-            //     gulpTaskId: "js-news-listing",
-            //     entry: config.root + "/js/news-listing/index.js",
-            //     filename: "news-listing.js",
-            //     watch: [
-            //         config.root + "/js/news-listing/**/*.js",
-            //         config.root + "/js/news-listing/**/*.jsx"
-            //     ]
-            // }
         ]
     };
 
