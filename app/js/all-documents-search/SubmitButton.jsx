@@ -5,7 +5,7 @@ import { string } from 'prop-types';
 class SubmitButton extends Component {
 
     static propTypes = {
-        searchButtonText: searchButtonText
+        searchButtonText: string
     }
 
     render = () => {

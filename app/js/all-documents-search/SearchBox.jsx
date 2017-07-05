@@ -5,7 +5,7 @@ import { string } from 'prop-types';
 class SearchBox extends Component {
 
     static propTypes = {
-        searchLabel: searchLabel
+        searchLabel: string
     }
 
     handleOnChange = (e) => {
