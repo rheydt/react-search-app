@@ -27,7 +27,82 @@
             <!-- BEGIN CONTENT -->
             <main role="main">
 
-                <aside role="complementary" aria-label="related content"></aside>
+                <!-- BEGIN SIDEBAR -->
+                <aside role="complementary" aria-label="related content">
+
+                    <div id="js-add-remove-country" class="js-add-remove-country"></div>
+
+                    <div class="module">
+                        <div style="color: red;">This is an "Experience Editor" only item.</div>
+                        <div style="">Changes are made without saving the current page.</div>
+
+                        <div style="margin-top: 10px; margin-bottom: 5px;">&nbsp;</div>
+
+                            <div>
+                                <form class="form imf-country-tag-form" method="post" action="/api/imf/countryfeaturednews/addfeatured">
+                                    <fieldset>
+                                        <input id="eeFeaturedInnerItem" type="hidden" value="744a1300-25ac-4bcc-98b8-50ea49529c12">
+                                        <legend>Select Country</legend>
+                                        <div class="form-row">
+                                            <select id="eeFeaturedCountries">
+                                                <option>--Select Country--</option>
+                                                    <option value="20689307-59d0-4adc-a923-9de7369a1b53">Italy</option>
+                                                    <option value="cafe9140-6fdf-4c66-975c-afd0e3c3cbf3">Mexico</option>
+                                            </select>
+                                            <br>
+                                            <div class="results"></div>
+                                        </div>
+                                        <div class="scWizardButtons">
+                                            <br>
+                                            <button class="form-submit">Add to Country</button>
+                                        </div>
+                                    </fieldset>
+                                </form>
+
+                                <div style="margin-top: 15px; margin-bottom: 15px;">&nbsp;</div>
+
+                                <div><i>Preview</i></div>
+                                <div>
+                                    <div><a href="#">Title of different article being Featured</a>
+                                    </div>
+                                    <div>2017-05-12 to 2017-06-05</div>
+                                </div>
+                                <br>
+                                <div>
+                                    <div><a href="#">Another Article in the Queue</a>
+                                    </div>
+                                    <div>2017-06-06 to 2017-06-30</div>
+                                </div>
+                                <div style="margin-top: 15px; margin-bottom: 15px;">
+                                    &nbsp;
+                                </div>
+                                <div>
+                                    <a href="http://devcm/?sc_mode=edit&amp;sc_itemid=%7bE2DE87DF-EFE2-40B8-B2FD-92DE54A19F43%7d&amp;sc_lang=en" target="_blank">Go to Country Page</a>
+                                </div>
+
+                            <script type="text/javascript">
+                                // dwp - this code needs to go on \Website\Areas\IMF\Views\Layout\Shared\Javascript.cshtml
+                                //jQuery(document).ready(function () {
+
+                                //    var webSearchForm = ".imf-country-tag-form";
+                                //    jQuery(webSearchForm + " .form-submit")
+                                //        .click(function (e) {
+                                //            e.preventDefault();
+
+                                //            jQuery(webSearchForm + " .results").html("");
+
+                                //            jQuery.post(
+                                //                jQuery(webSearchForm).attr("action") /*, { text: jQuery(webSearchForm + " #text").val() } */
+                                //            ).done(function (r) {
+                                //                jQuery(webSearchForm + " .results").append("<span style='font-weight: bold;'>" + r.results + "</span>");
+                                //            });
+                                //        });
+                                //});
+                            </script>
+                        </div>
+                    </div>
+                </aside>
+                <!-- END SIDEBAR -->
 
                 <!-- BEGIN ARTICLE -->
                 <article role="article" aria-label="primary content">
@@ -61,6 +136,7 @@
                     </section>
 
                 </article>
+                <!-- END ARTICLE -->
             </main>
             <!-- END CONTENT -->
 
@@ -77,3 +153,4 @@
         <!-- END NEW FILES -->
     </body>
 </html>
+
