@@ -9,6 +9,8 @@ import GoToCountryLink from './GoToCountryLink.jsx';
 class AddRemoveCountryApp extends Component {
 
     state = {
+        serviceBase: "/api/imf/countryfeaturednews/",
+        getService: "getfeatured=",
         countryLabel: "Select Country",
         countryPlaceholder: "Choose A Country",
         countries: [
@@ -21,6 +23,10 @@ class AddRemoveCountryApp extends Component {
                 id: "cafe9140-6fdf-4c66-975c-afd0e3c3cbf3"
             }
         ],
+        addButton: {
+            text: "Add to {country}",
+            service: "addfeatured=",
+        },
         goToCountryLink: {
             text: "Go To {country} Page",
             url: "http://devcm/?sc_mode=edit&amp;sc_itemid=%7bE2DE87DF-EFE2-40B8-B2FD-92DE54A19F43%7d&amp;sc_lang=en"
@@ -37,22 +43,38 @@ class AddRemoveCountryApp extends Component {
                 url: "#",
                 dateRange: "2017-05-13 to 2017-07-05"
             }
-        ]
+        ],
+        removeButton: {
+            text: "Remove from {country}",
+            service: "removefeatured="
+        }
+    }
+
+    addToCountry = () => {
+        console.log("add to country");
+    }
+
+    removeFromCountry = (item, country) => {
+        console.log("remove from country");
     }
 
     render = () => {
 
-        const { countryLabel, countryPlaceholder, countries, goToCountryLink, previewLabel, previewItems } = this.state;
+        const { countryLabel, countryPlaceholder, countries, goToCountryLink, previewLabel, previewItems, addButton, removeButton } = this.state;
 
         const countryDropdownProps = {
             countryLabel: countryLabel,
             countryPlaceholder: countryPlaceholder,
-            countries: countries
+            countries: countries,
+            addButton: addButton,
+            addToCountry: this.addToCountry
         }
 
         const previewListProps = {
             previewLabel: previewLabel,
-            previewItems: previewItems
+            previewItems: previewItems,
+            removeButton: removeButton,
+            removeFromCountry: this.removeFromCountry
         }
 
         return (
