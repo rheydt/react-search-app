@@ -74,3 +74,24 @@
     .all-documents-search .pnlGroup .current-page {
         padding: 0 10px;
     }
+
+/*** ADD/REMOVE COUNTRY ARTICLE ***/
+    .add-remove-country .notes {
+        margin-bottom: 30px;
+    }
+
+    .add-remove-country .alert {
+        color: red;
+    }
+
+    .add-remove-country .imf-country-tag-form {
+        margin-bottom: 40px;
+    }
+
+    .add-remove-country .articles-preview {
+        margin-bottom: 40px;
+    }
+
+    .add-remove-country .articles-preview .article:not(:last-of-type) {
+        margin-bottom: 20px;
+    }
