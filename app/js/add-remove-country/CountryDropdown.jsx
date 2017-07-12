@@ -7,14 +7,16 @@ import CountriesSelect from './CountriesSelect.jsx';
 class CountryDropdown extends Component {
 
     static propTypes = {
+        currentCountry: shape({
+            name: string,
+            id: string
+        }),
         countryLabel: string,
         countryPlaceholder: string,
         countries: array,
-        addButton: shape({
-            text: string,
-            service: string
-        }),
-        addToCountry: func
+        addButtonText: string,
+        addToCountry: func,
+        updateChosenCountry: func
     }
 
     handleButtonClick = (e) => {
@@ -22,11 +24,13 @@ class CountryDropdown extends Component {
     }
 
     render = () => {
-        const { countryLabel, countryPlaceholder, countries, addButton } = this.props;
+        const { currentCountry, countryLabel, countryPlaceholder, countries, addButtonText, updateChosenCountry } = this.props;
 
         const countriesSelectProps = {
+            currentCountry: currentCountry,
             countryPlaceholder: countryPlaceholder,
-            countries: countries
+            countries: countries,
+            updateChosenCountry: updateChosenCountry
         }
 
         return (
@@ -39,9 +43,9 @@ class CountryDropdown extends Component {
                         <br />
                         <div className="results"></div>
                     </div>
-                    <div className="scWizardButtons">
+                    <div>
                         <br />
-                        <button className="form-submit" onClick={this.handleButtonClick}>{addButton.text}</button>
+                        <button className="form-submit" onClick={this.handleButtonClick}>{addButtonText}</button>
                     </div>
                 </fieldset>
             </form>

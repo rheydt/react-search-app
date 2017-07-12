@@ -3,16 +3,22 @@ import ReactDOM from "react-dom";
 
 import CountryDropdown from './CountryDropdown.jsx';
 import PreviewList from './PreviewList.jsx';
-import GoToCountryLink from './GoToCountryLink.jsx';
 
 
 class AddRemoveCountryApp extends Component {
 
     state = {
-        serviceBase: "/api/imf/countryfeaturednews/",
-        getService: "getfeatured=",
-        countryLabel: "Select Country",
-        countryPlaceholder: "Choose A Country",
+        service: {
+            base: "/api/imf/countryfeaturednews/",
+            get: "getfeatured=",
+            add: "addfeatured=",
+            remove: "removefeatured="
+        },
+        currentCountry: {
+            name: "Mexico",
+            id: "cafe9140-6fdf-4c66-975c-afd0e3c3cbf3",
+            url: "http://devcm/?sc_mode=edit&amp;sc_itemid=%7bE2DE87DF-EFE2-40B8-B2FD-92DE54A19F43%7d&amp;sc_lang=en"
+        },
         countries: [
             {
                 name: "Italy",
@@ -23,15 +29,6 @@ class AddRemoveCountryApp extends Component {
                 id: "cafe9140-6fdf-4c66-975c-afd0e3c3cbf3"
             }
         ],
-        addButton: {
-            text: "Add to {country}",
-            service: "addfeatured=",
-        },
-        goToCountryLink: {
-            text: "Go To {country} Page",
-            url: "http://devcm/?sc_mode=edit&amp;sc_itemid=%7bE2DE87DF-EFE2-40B8-B2FD-92DE54A19F43%7d&amp;sc_lang=en"
-        },
-        previewLabel: "Displaying {num} current items on {country}",
         previewItems: [
             {
                 title: "Title of different article being Featured",
@@ -44,9 +41,13 @@ class AddRemoveCountryApp extends Component {
                 dateRange: "2017-05-13 to 2017-07-05"
             }
         ],
-        removeButton: {
-            text: "Remove from {country}",
-            service: "removefeatured="
+        dictionary: {
+            countryLabel: "Select Country",
+            countryPlaceholder: "Choose A Country",
+            previewLabel: "Displaying {num} current items on {country}",
+            addButtonText: "Add to {country}",
+            removeButtonText: "Remove from {country}",
+            goToCountryButtonText: "Go To {country}'s Page"
         }
     }
 
@@ -58,24 +59,39 @@ class AddRemoveCountryApp extends Component {
         console.log("remove from country");
     }
 
-    render = () => {
+    replaceCountryToken = (string) => {
+        const { currentCountry } = this.state;
 
-        const { countryLabel, countryPlaceholder, countries, goToCountryLink, previewLabel, previewItems, addButton, removeButton } = this.state;
+        const countryPattern = /{country}/g;
+
+        return string.replace(countryPattern, currentCountry.name);
+    }
+
+    updateChosenCountry = (countryId) => {
+        console.log("update chosen country to ", countryId);
+    }
+
+    render = () => {
+        const { currentCountry, countries, previewItems, dictionary } = this.state;
 
         const countryDropdownProps = {
-            countryLabel: countryLabel,
-            countryPlaceholder: countryPlaceholder,
+            currentCountry: currentCountry,
+            countryLabel: dictionary.countryLabel,
+            countryPlaceholder: dictionary.countryPlaceholder,
             countries: countries,
-            addButton: addButton,
-            addToCountry: this.addToCountry
+            addButtonText: this.replaceCountryToken(dictionary.addButtonText),
+            addToCountry: this.addToCountry,
+            updateChosenCountry: this.updateChosenCountry
         }
 
         const previewListProps = {
-            previewLabel: previewLabel,
+            previewLabel: dictionary.previewLabel,
             previewItems: previewItems,
-            removeButton: removeButton,
+            removeButtonText: this.replaceCountryToken(dictionary.removeButtonText),
             removeFromCountry: this.removeFromCountry
         }
+
+        const goToCountryText = this.replaceCountryToken(dictionary.goToCountryButtonText);
 
         return (
             <div className="module">
@@ -89,7 +105,7 @@ class AddRemoveCountryApp extends Component {
 
                 <PreviewList {...previewListProps} />
 
-                <GoToCountryLink {...goToCountryLink} />
+                <a href="{currentCountry.url}">{goToCountryText}</a>
 
             </div>
         );

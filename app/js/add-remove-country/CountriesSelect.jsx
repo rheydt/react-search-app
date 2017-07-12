@@ -1,28 +1,39 @@
 import React, { Component } from 'react';
 import ReactDOM from "react-dom";
-import { string, array } from 'prop-types';
+import { shape, string, array, func } from 'prop-types';
 
 
 class CountriesSelect extends Component {
 
     static propTypes = {
+        currentCountry: shape({
+            name: string,
+            id: string
+        }),
         countryPlaceholder: string,
-        countries: array
+        countries: array,
+        updateChosenCountry: func
+    }
+
+    handleChange = (e) => {
+        const { updateChosenCountry } = this.props;
+
+        updateChosenCountry(e.target.value);
     }
 
     renderCountryList = () => {
         const { countries } = this.props;
 
         return countries.map((item, index) =>
-            <option key={index} value={item.id}>{item.name}</option>
+            <option key={index} value={item.id} onClick={this.handleSelect}>{item.name}</option>
         );
     }
 
     render = () => {
-        const {countryPlaceholder} = this.props;
+        const { currentCountry, countryPlaceholder } = this.props;
 
         return (
-            <select className="eeFeaturedCountries">
+            <select className="eeFeaturedCountries" onChange={this.handleChange}>
                 <option>{countryPlaceholder}</option>
                 {this.renderCountryList()}
             </select>
