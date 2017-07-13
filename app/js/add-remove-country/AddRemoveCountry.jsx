@@ -5,7 +5,7 @@ import CountryDropdown from './CountryDropdown.jsx';
 import PreviewList from './PreviewList.jsx';
 
 
-class AddRemoveCountryNews extends Component {
+class AddRemoveCountryApp extends Component {
 
     state = {
         service: {
@@ -152,7 +152,7 @@ class AddRemoveCountryNews extends Component {
 
                 <CountryDropdown {...countryDropdownProps} />
 
-                // <PreviewList {...previewListProps} />
+                <PreviewList {...previewListProps} />
 
                 <a href="{currentCountry.url}">{goToCountryText}</a>
 
@@ -160,4 +160,4 @@ class AddRemoveCountryNews extends Component {
         );
     }
 }
-export default AddRemoveCountryNews;
+export default AddRemoveCountryApp;
