@@ -69,6 +69,47 @@ class AddRemoveCountryApp extends Component {
 
     updateChosenCountry = (countryId) => {
         console.log("update chosen country to ", countryId);
+        const url = buildServiceUrl("get");
+        const results = requestResults(url);
+    }
+
+    buildServiceUrl = (action) => {
+        const { service } = this.state;
+
+        if (action === "get") {
+            return service.base + service.get;
+        } else if (action === "add") {
+            return service.base + service.add;
+        } else if (action === "remove") {
+            return service.base + service.remove;
+        }
+
+    }
+
+    requestResults = (url) => {
+        fetch(url)
+            .then(response => {
+                if (!response.ok) {
+                    this.setState({
+                        requestFailed: true
+                    });
+                    throw Error("Network request failed");
+                }
+                console.log("response:", response);
+                return response
+            })
+            .then(d => d.json())
+            .then(d => {
+                console.log("data:", d);
+                this.setState({
+                    currentCountry: d.currentCountry,
+                    previewItems: d.previewItems
+                })
+            }, () => {
+                // this.setState({
+                //     results: []
+                // })
+            })
     }
 
     render = () => {
