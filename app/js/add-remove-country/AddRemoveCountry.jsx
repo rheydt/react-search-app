@@ -15,9 +15,9 @@ class AddRemoveCountryApp extends Component {
             remove: "removefeatured="
         },
         currentCountry: {
-            name: "Mexico",
-            id: "cafe9140-6fdf-4c66-975c-afd0e3c3cbf3",
-            url: "http://devcm/?sc_mode=edit&amp;sc_itemid=%7bE2DE87DF-EFE2-40B8-B2FD-92DE54A19F43%7d&amp;sc_lang=en"
+            name: "",
+            id: "",
+            url: ""
         },
         countries: [
             {
@@ -55,7 +55,6 @@ class AddRemoveCountryApp extends Component {
         error: false
     }
 
-
     addToCountry = () => {
         console.log("add to country");
         const url = this.buildServiceUrl("add");
@@ -79,9 +78,10 @@ class AddRemoveCountryApp extends Component {
     }
 
     updateChosenCountry = (countryObj) => {
-        console.log(countryObj);
-        // console.log("update chosen country to ", countryObj.name);
-        // set state
+        console.log("updating to ", countryObj);
+        this.setState({
+            currentCountry: countryObj
+        })
     }
 
     getPreviewItems = (countryId) => {
@@ -134,6 +134,7 @@ class AddRemoveCountryApp extends Component {
     }
 
     render = () => {
+        console.log("rendering");
         const { currentCountry, countries, previewItems, dictionary } = this.state;
 
         const countryDropdownProps = {
@@ -153,8 +154,6 @@ class AddRemoveCountryApp extends Component {
             removeFromCountry: this.removeFromCountry
         }
 
-        const goToCountryText = this.replaceCountryToken(dictionary.goToCountryButtonText);
-
         return (
             <div className="module">
 
@@ -165,9 +164,12 @@ class AddRemoveCountryApp extends Component {
 
                 <CountryDropdown {...countryDropdownProps} />
 
-                <PreviewList {...previewListProps} />
-
-                <a href="{currentCountry.url}">{goToCountryText}</a>
+                { currentCountry.id !== "" && (
+                    <div>
+                        <PreviewList {...previewListProps} />
+                        <a href="{currentCountry.url}">{this.replaceCountryToken(dictionary.goToCountryButtonText)}</a>
+                    </div>
+                )}
 
             </div>
         );

@@ -18,7 +18,13 @@ class CountriesSelect extends Component {
     handleChange = (e) => {
         const { updateChosenCountry } = this.props;
 
-        updateChosenCountry(e.target.value);
+        const selectedIndex = e.target.options.selectedIndex;
+        const selectedCountry = e.target.options[selectedIndex];
+
+        updateChosenCountry({
+            name: selectedCountry.text,
+            id: selectedCountry.value
+        });
     }
 
     renderCountryList = () => {
@@ -34,7 +40,7 @@ class CountriesSelect extends Component {
 
         return (
             <select className="eeFeaturedCountries" onChange={this.handleChange}>
-                <option>{countryPlaceholder}</option>
+                <option value="">{countryPlaceholder}</option>
                 {this.renderCountryList()}
             </select>
         );

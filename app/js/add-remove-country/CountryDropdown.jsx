@@ -36,17 +36,26 @@ class CountryDropdown extends Component {
         return (
             <form className="form imf-country-tag-form" method="post" action="/api/imf/countryfeaturednews/addfeatured">
                 <fieldset>
+
                     <input id="eeFeaturedInnerItem" type="hidden" value="744a1300-25ac-4bcc-98b8-50ea49529c12" />
-                    <legend>{countryLabel}</legend>
+
+                    { countryLabel !== ""  && (
+                        <legend>{countryLabel}</legend>
+                    )}
+
                     <div className="form-row">
                         <CountriesSelect {...countriesSelectProps} />
                         <br />
                         <div className="results"></div>
                     </div>
-                    <div>
-                        <br />
-                        <button className="form-submit" onClick={this.handleButtonClick}>{addButtonText}</button>
-                    </div>
+
+                    { currentCountry.id !== "" && (
+                        <div>
+                            <br />
+                            <button className="form-submit" onClick={this.handleButtonClick}>{addButtonText}</button>
+                        </div>
+                    )}
+
                 </fieldset>
             </form>
         );
