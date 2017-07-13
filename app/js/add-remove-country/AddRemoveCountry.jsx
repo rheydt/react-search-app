@@ -73,17 +73,21 @@ class AddRemoveCountryApp extends Component {
         const results = requestResults(url);
     }
 
+
     buildServiceUrl = (action) => {
         const { service } = this.state;
 
-        if (action === "get") {
-            return service.base + service.get;
-        } else if (action === "add") {
-            return service.base + service.add;
-        } else if (action === "remove") {
-            return service.base + service.remove;
+        switch (action) {
+            case "get":
+                return service.base + service.get;
+                break;
+            case "add":
+                return service.base + service.add;
+                break;
+            case "remove":
+                return service.base + service.remove;
+                break;
         }
-
     }
 
     requestResults = (url) => {
