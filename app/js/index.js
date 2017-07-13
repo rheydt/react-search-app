@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import ReactDOM from "react-dom";
 
 import { initAllDocumentsSearch } from "./all-documents-search/index.js";
-import AddRemoveCountryApp from './add-remove-country/AddRemoveCountry.jsx';
+import { AddRemoveCountryNews } from './add-remove-country/AddRemoveCountryNews.jsx';
 
 
 $(document).ready( function() {
@@ -18,7 +18,7 @@ $(document).ready( function() {
         console.log("add or remove country init");
 
         ReactDOM.render(
-            <AddRemoveCountryApp />,
+            <AddRemoveCountryNews />,
             document.getElementById('js-add-remove-country')
         );
     }
