@@ -53,10 +53,14 @@ class AddRemoveCountryApp extends Component {
 
     addToCountry = () => {
         console.log("add to country");
+        const url = this.buildServiceUrl("add");
+        const results = this.requestResults(url);
     }
 
     removeFromCountry = (item, country) => {
         console.log("remove from country");
+        const url = this.buildServiceUrl("remove");
+        const results = this.requestResults(url);
     }
 
     replaceCountryToken = (string) => {
@@ -69,8 +73,8 @@ class AddRemoveCountryApp extends Component {
 
     updateChosenCountry = (countryId) => {
         console.log("update chosen country to ", countryId);
-        const url = buildServiceUrl("get");
-        const results = requestResults(url);
+        const url = this.buildServiceUrl("get");
+        const results = this.requestResults(url);
     }
 
 
