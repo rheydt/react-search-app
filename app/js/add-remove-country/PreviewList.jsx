@@ -11,7 +11,9 @@ class PreviewList extends Component {
         previewLabel: string,
         previewItems: array,
         removeButtonText: string,
-        removeFromCountry: func
+        undoButtonText: string,
+        removeFromCountry: func,
+        addToCountry: func
     }
 
     replaceNumToken = (string) => {
@@ -23,20 +25,22 @@ class PreviewList extends Component {
     }
 
     renderPreviewList = () => {
-        const { previewItems, removeButtonText, removeFromCountry } = this.props;
+        const { previewItems, removeButtonText, undoButtonText, removeFromCountry, addToCountry } = this.props;
 
-        const removeProps = {
-            text: removeButtonText,
-            method: removeFromCountry
+        const previewProps = {
+            removeText: removeButtonText,
+            undoText: undoButtonText,
+            remove: removeFromCountry,
+            undo: addToCountry
         }
 
         return previewItems.map((item, index) =>
-            <Article key={index} data={item} remove={removeProps} />
+            <Article key={index} data={item} previewProps={previewProps} />
         );
     }
 
     render = () => {
-        const { previewLabel } = this.props;
+        const { previewLabel, previewItems } = this.props;
 
         const previewLabelWithNum = this.replaceNumToken(previewLabel);
 
@@ -44,7 +48,10 @@ class PreviewList extends Component {
             <div className="articles-preview">
                 <p><i>{previewLabelWithNum}</i></p>
 
-                {this.renderPreviewList()}
+                { previewItems.length > 0 && (
+                    this.renderPreviewList()
+                )}
+
             </div>
         );
     }

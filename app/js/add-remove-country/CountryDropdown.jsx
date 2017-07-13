@@ -46,7 +46,6 @@ class CountryDropdown extends Component {
                     <div className="form-row">
                         <CountriesSelect {...countriesSelectProps} />
                         <br />
-                        <div className="results"></div>
                     </div>
 
                     { currentCountry.id !== "" && (

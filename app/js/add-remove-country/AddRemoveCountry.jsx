@@ -19,6 +19,7 @@ class AddRemoveCountryApp extends Component {
             id: "",
             url: ""
         },
+        currentPageId: "744a1300-25ac-4bcc-98b8-50ea49529c12",
         countries: [
             {
                 name: "Italy",
@@ -46,28 +47,14 @@ class AddRemoveCountryApp extends Component {
         dictionary: {
             countryLabel: "Select Country",
             countryPlaceholder: "Choose A Country",
-            previewLabel: "Displaying {num} current items for {country}:",
+            previewLabel: "Displaying {num} items for {country}",
             addButtonText: "Add to {country}",
             removeButtonText: "Remove from {country}",
-            goToCountryButtonText: "Go To {country}'s Page"
+            goToCountryButtonText: "Go To {country}'s Page",
+            undoLabel: "Undo"
         },
         publicFacingMessage: "",
         error: false
-    }
-
-    addToCountry = () => {
-        console.log("add to country");
-        const url = this.buildServiceUrl("add");
-        // http://devcm/api/imf/countryfeaturednews/addfeatured?countryId=cafe9140-6fdf-4c66-975c-afd0e3c3cbf3&itemid=744a1300-25ac-4bcc-98b8-50ea49529c12
-        const results = this.requestResults(url);
-        //{"publicFacingMessage":"Item already being featured","successful":false}
-    }
-
-    removeFromCountry = (item, country) => {
-        console.log("remove from country");
-        const url = this.buildServiceUrl("remove");
-        //http://devcm/api/imf/countryfeaturednews/removefeatured?countryId=cafe9140-6fdf-4c66-975c-afd0e3c3cbf3&itemid=744a1300-25ac-4bcc-98b8-50ea49529c12
-        const results = this.requestResults(url);
     }
 
     replaceCountryToken = (string) => {
@@ -78,16 +65,15 @@ class AddRemoveCountryApp extends Component {
     }
 
     updateChosenCountry = (countryObj) => {
-        console.log("updating to ", countryObj);
-        this.setState({
-            currentCountry: countryObj
-        })
+        this.setState({currentCountry: countryObj})
     }
 
-    getPreviewItems = (countryId) => {
+    getPreviewItems = () => {
+
+        // don't need item id
         console.log("getting items for ", countryId);
-        const url = this.buildServiceUrl("get");
-        //http://devcm/api/imf/countryfeaturednews/getfeatured?countryId=cafe9140-6fdf-4c66-975c-afd0e3c3cbf3&itemid=744a1300-25ac-4bcc-98b8-50ea49529c12
+        const url = this.buildServiceUrl("get", item);
+        //http://devcm/api/imf/countryfeaturednews/getfeatured?countryId=cafe9140-6fdf-4c66-975c-afd0e3c3cbf3
         const results = this.requestResults(url);
         // [{"dateRangeText":"2017-07-11 to 2017-07-25","title":"dwp-TestEvent-Page","url":"/en/Velir/dwp-TestEvent-Page","featuredNewsItemId":"bcfea9aa-6877-43ff-847f-316bd8b6db1f","featuredNewsInnerItemId":"744a1300-25ac-4bcc-98b8-50ea49529c12","countryPageId":"8307afa9-4517-4509-a3d5-0e98625d0036"}]
         this.setState({
@@ -95,18 +81,42 @@ class AddRemoveCountryApp extends Component {
         });
     }
 
-    buildServiceUrl = (action) => {
-        const { service } = this.state;
+    addToCountry = (item) => {
+        console.log("add to country");
+        const url = this.buildServiceUrl("add", item);
+        // http://devcm/api/imf/countryfeaturednews/addfeatured?countryId=cafe9140-6fdf-4c66-975c-afd0e3c3cbf3&itemid=744a1300-25ac-4bcc-98b8-50ea49529c12
+
+        const results = this.requestResults(url);
+        this.setState({
+            publicFacingMessage: results.publicFacingMessage,
+            error: results.successful
+        })
+        //{"publicFacingMessage":"Item already being featured","successful":false}
+    }
+
+    removeFromCountry = (item) => {
+        console.log("remove from country");
+        const url = this.buildServiceUrl("remove", item);
+        //http://devcm/api/imf/countryfeaturednews/removefeatured?countryId=cafe9140-6fdf-4c66-975c-afd0e3c3cbf3&itemid=744a1300-25ac-4bcc-98b8-50ea49529c12
+        const results = this.requestResults(url);
+    }
+
+    buildServiceUrl = (action, item) => {
+        // make item argument option
+        const { service, currentCountry } = this.state;
+
+        const countryString = "countryId=" + currentCountry.id;
+        const itemString = "itemid=" + item;
 
         switch (action) {
             case "get":
-                return service.base + service.get;
+                return service.base + service.get + "?" + countryString;
                 break;
             case "add":
-                return service.base + service.add;
+                return service.base + service.add + "?" + countryString + itemString;
                 break;
             case "remove":
-                return service.base + service.remove;
+                return service.base + service.remove + "?" + countryString + itemString;
                 break;
         }
     }
@@ -151,7 +161,9 @@ class AddRemoveCountryApp extends Component {
             previewLabel: this.replaceCountryToken(dictionary.previewLabel),
             previewItems: previewItems,
             removeButtonText: this.replaceCountryToken(dictionary.removeButtonText),
-            removeFromCountry: this.removeFromCountry
+            undoButtonText: dictionary.undoLabel,
+            removeFromCountry: this.removeFromCountry,
+            addToCountry: this.addToCountry
         }
 
         return (
