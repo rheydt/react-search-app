@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import { string, array, shape, func } from 'prop-types';
 
 import CountriesSelect from './CountriesSelect.jsx';
+import AddButton from './AddButton.jsx';
 
 class CountryDropdown extends Component {
 
@@ -16,15 +17,13 @@ class CountryDropdown extends Component {
         countries: array,
         addButtonText: string,
         addToCountry: func,
-        updateChosenCountry: func
-    }
-
-    handleButtonClick = (e) => {
-        addToCountry();
+        updateChosenCountry: func,
+        previewItems: array,
+        currentPageId: string
     }
 
     render = () => {
-        const { currentCountry, countryLabel, countryPlaceholder, countries, addButtonText, updateChosenCountry } = this.props;
+        const { currentCountry, countryLabel, countryPlaceholder, countries, addButtonText, updateChosenCountry, previewItems, currentPageId, addToCountry } = this.props;
 
         const countriesSelectProps = {
             currentCountry: currentCountry,
@@ -33,11 +32,18 @@ class CountryDropdown extends Component {
             updateChosenCountry: updateChosenCountry
         }
 
-        return (
-            <form className="form imf-country-tag-form" method="post" action="/api/imf/countryfeaturednews/addfeatured">
-                <fieldset>
+        const addButtonProps = {
+            addButtonText: addButtonText,
+            addToCountry: addToCountry
+        }
 
-                    <input id="eeFeaturedInnerItem" type="hidden" value="744a1300-25ac-4bcc-98b8-50ea49529c12" />
+        const isCurrentPageItem = previewItems.filter(function(item){
+            return item.id === currentPageId;
+        });
+
+        return (
+            <form className="form imf-country-tag-form">
+                <fieldset>
 
                     { countryLabel !== ""  && (
                         <legend>{countryLabel}</legend>
@@ -48,11 +54,8 @@ class CountryDropdown extends Component {
                         <br />
                     </div>
 
-                    { currentCountry.id !== "" && (
-                        <div>
-                            <br />
-                            <button className="form-submit" onClick={this.handleButtonClick}>{addButtonText}</button>
-                        </div>
+                    { (currentCountry.id !== "" && isCurrentPageItem.length > 0) && (
+                        <AddButton {...addButtonProps} />
                     )}
 
                 </fieldset>

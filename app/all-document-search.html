@@ -30,6 +30,26 @@
                 <!-- BEGIN SIDEBAR -->
                 <aside role="complementary" aria-label="related content">
 
+                <script type="text/javascript">
+                    var countryNewsBackendProps = {
+                        service: {
+                            base: "/api/imf/countryfeaturednews/",
+                            get: "getfeatured=",
+                            add: "addfeatured=",
+                            remove: "removefeatured="
+                        },
+                        currentPageId: "744a1300-25ac-4bcc-98b8-50ea49529c12",
+                        dictionary: {
+                            countryLabel: "Select Country",
+                            countryPlaceholder: "Choose A Country",
+                            previewLabel: "Displaying {num} items for {country}",
+                            addButtonText: "Add to {country}",
+                            removeButtonText: "Remove from {country}",
+                            goToCountryButtonText: "Go To {country}'s Page"
+                        }
+                    }
+                </script>
+
                     <div id="js-add-remove-country" class="js-add-remove-country add-remove-country"></div>
 
                             <script type="text/javascript">

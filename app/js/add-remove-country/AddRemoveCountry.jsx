@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from "react-dom";
+import { shape, string } from 'prop-types';
 
 import CountryDropdown from './CountryDropdown.jsx';
 import PreviewList from './PreviewList.jsx';
@@ -7,19 +8,32 @@ import PreviewList from './PreviewList.jsx';
 
 class AddRemoveCountryApp extends Component {
 
+    /* props come from BE via script tag in .cshtml */
+
+    static propTypes = {
+        service: shape({
+            base: string,
+            get: string,
+            add: string,
+            remove: string
+        }),
+        currentPageId: string,
+        dictionary: shape({
+            countryLabel: string,
+            countryPlaceholder: string,
+            previewLabel: string,
+            addButtonText: string,
+            removeButtonText: string,
+            goToCountryButtonText: string
+        })
+    }
+
     state = {
-        service: {
-            base: "/api/imf/countryfeaturednews/",
-            get: "getfeatured=",
-            add: "addfeatured=",
-            remove: "removefeatured="
-        },
         currentCountry: {
             name: "",
             id: "",
             url: ""
         },
-        currentPageId: "744a1300-25ac-4bcc-98b8-50ea49529c12",
         countries: [
             {
                 name: "Italy",
@@ -42,17 +56,14 @@ class AddRemoveCountryApp extends Component {
                 url: "#",
                 dateRange: "2017-05-13 to 2017-07-05",
                 id: "234234"
-            }
+            },
+            {
+                title: "Current Page Article",
+                url: "#",
+                dateRange: "XXXX-XX-XX to XXXX-XX-XX",
+                id: "744a1300-25ac-4bcc-98b8-50ea49529c12"
+            },
         ],
-        dictionary: {
-            countryLabel: "Select Country",
-            countryPlaceholder: "Choose A Country",
-            previewLabel: "Displaying {num} items for {country}",
-            addButtonText: "Add to {country}",
-            removeButtonText: "Remove from {country}",
-            goToCountryButtonText: "Go To {country}'s Page",
-            undoLabel: "Undo"
-        },
         publicFacingMessage: "",
         error: false
     }
@@ -69,7 +80,6 @@ class AddRemoveCountryApp extends Component {
     }
 
     getPreviewItems = () => {
-
         // don't need item id
         console.log("getting items for ", countryId);
         const url = this.buildServiceUrl("get", item);
@@ -81,9 +91,11 @@ class AddRemoveCountryApp extends Component {
         });
     }
 
-    addToCountry = (item) => {
+    addToCountry = () => {
         console.log("add to country");
-        const url = this.buildServiceUrl("add", item);
+        const { currentPageId } = this.props;
+
+        const url = this.buildServiceUrl("add", currentPageId);
         // http://devcm/api/imf/countryfeaturednews/addfeatured?countryId=cafe9140-6fdf-4c66-975c-afd0e3c3cbf3&itemid=744a1300-25ac-4bcc-98b8-50ea49529c12
 
         const results = this.requestResults(url);
@@ -96,17 +108,19 @@ class AddRemoveCountryApp extends Component {
 
     removeFromCountry = (item) => {
         console.log("remove from country");
-        const url = this.buildServiceUrl("remove", item);
+        const { currentPageId } = this.props;
+
+        const url = this.buildServiceUrl("remove", currentPageId);
         //http://devcm/api/imf/countryfeaturednews/removefeatured?countryId=cafe9140-6fdf-4c66-975c-afd0e3c3cbf3&itemid=744a1300-25ac-4bcc-98b8-50ea49529c12
         const results = this.requestResults(url);
     }
 
-    buildServiceUrl = (action, item) => {
-        // make item argument option
-        const { service, currentCountry } = this.state;
+    buildServiceUrl = (action) => {
+        const { service, currentPageId } = this.props;
+        const { currentCountry } = this.state;
 
         const countryString = "countryId=" + currentCountry.id;
-        const itemString = "itemid=" + item;
+        const itemString = "itemid=" + currentPageId;
 
         switch (action) {
             case "get":
@@ -144,8 +158,8 @@ class AddRemoveCountryApp extends Component {
     }
 
     render = () => {
-        console.log("rendering");
-        const { currentCountry, countries, previewItems, dictionary } = this.state;
+        const { currentCountry, countries, previewItems } = this.state;
+        const { dictionary, currentPageId } = this.props;
 
         const countryDropdownProps = {
             currentCountry: currentCountry,
@@ -154,16 +168,17 @@ class AddRemoveCountryApp extends Component {
             countries: countries,
             addButtonText: this.replaceCountryToken(dictionary.addButtonText),
             addToCountry: this.addToCountry,
-            updateChosenCountry: this.updateChosenCountry
+            updateChosenCountry: this.updateChosenCountry,
+            previewItems: previewItems,
+            currentPageId: currentPageId
         }
 
         const previewListProps = {
             previewLabel: this.replaceCountryToken(dictionary.previewLabel),
             previewItems: previewItems,
             removeButtonText: this.replaceCountryToken(dictionary.removeButtonText),
-            undoButtonText: dictionary.undoLabel,
             removeFromCountry: this.removeFromCountry,
-            addToCountry: this.addToCountry
+            currentPageId: currentPageId
         }
 
         return (

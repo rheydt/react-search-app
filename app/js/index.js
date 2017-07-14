@@ -16,9 +16,10 @@ $(document).ready( function() {
     // Add to or Remove from Country
     if ($("#js-add-remove-country").length) {
         console.log("add or remove country init");
+        /* props come from BE via global variable in script tag in .cshtml */
 
         ReactDOM.render(
-            <AddRemoveCountryApp />,
+            <AddRemoveCountryApp {...countryNewsBackendProps}/>,
             document.getElementById('js-add-remove-country')
         );
     }
